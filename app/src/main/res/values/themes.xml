@@ -93,7 +93,27 @@
         <item name="android:textColor">@color/black_87_transparency</item>
     </style>
 
+    <style name="Title.PossibilityAcne">
+        <item name="android:fontFamily">@font/domine_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight">25dp</item>
+        <item name="android:textColor">@color/detail_screen_title</item>
+    </style>
 
+    <style name="Title.ArticleHeader">
+        <item name="android:fontFamily">@font/opensans_semibold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="color">@color/black</item>
+    </style>
+
+    <style name="Title.ItemResultTitle">
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">10.8dp</item>
+        <item name="color">@color/result_item_title</item>
+    </style>
+    
+    
     <!-- SUB TITLE TEXT STYLE -->
     <style name="Subtitle" />
     <style name="Subtitle.LoginRegister">
@@ -148,4 +168,13 @@
         <item name="android:lineHeight">128.9dp</item>
         <item name="android:textColor">@color/black_87_transparency</item>
     </style>
+    
+    <style name="Content.DescriptionPossibilityAcne">
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:lineHeight">18dp</item>
+        <item name="android:textColor">@color/detail_screen_description</item>
+    </style>
+
+
 </resources>

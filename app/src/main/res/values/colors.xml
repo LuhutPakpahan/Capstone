@@ -14,5 +14,7 @@
     
     <!-- Text Color -->
     <color name="detail_screen_title">#1F529F</color>
+    <color name="detail_screen_description">#555C67</color>
     <color name="profile_name_title">#484848</color>
+    <color name="result_item_title">#1F529F</color>
 </resources>
