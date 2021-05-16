@@ -13,4 +13,139 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- TITLE TEXT STYLE -->
+    <style name="Title" />
+    
+    <style name="Title.LoginRegister">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/detail_screen_title</item>
+    </style>
+    
+    <style name="Title.Form">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_50_transparency</item>
+    </style>
+    
+    <style name="Title.Button">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Title.FeedbackHeader">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <style name="Title.Profile_Name">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/profile_name_title</item>
+    </style>
+
+    <style name="Title.ItemNavigationDrawer">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <style name="Title.HomeSection">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <style name="Title.HomePrimaryButton">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
+    
+    <style name="Title.ResultButton">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+    </style>
+    
+    <style name="Title.FeedbackQuestion">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Title.FeedbackSuggestions">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
+
+
+    <!-- SUB TITLE TEXT STYLE -->
+    <style name="Subtitle" />
+    <style name="Subtitle.LoginRegister">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_50_transparency</item>
+    </style>
+    
+    <style name="Subtitle.ArticleDescription">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
+
+
+    <!-- CONTENT TEXT STYLE -->
+    <style name="Content" />
+
+    <style name="Content.Form">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
+
+    <style name="Content.FeedbackSubHeader">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
+    
+    <style name="Content.TakeAPhotoSubHeader">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Content.Agreement">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <style name="Content.FeedbackRangeValue">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">7sp</item>
+        <item name="android:lineHeight">128.9dp</item>
+        <item name="android:textColor">@color/black_87_transparency</item>
+    </style>
 </resources>
