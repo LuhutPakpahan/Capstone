@@ -5,5 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity">
+    
+    <ImageView
+        android:id="@+id/iv_picture_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/placeholder_maskot_acne_scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@+id/tv_profile_name"
+        style="@style/Title.Profile_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/hello_name"
+        app:layout_constraintBottom_toBottomOf="@id/iv_picture_profile"
+        app:layout_constraintEnd_toStartOf="@id/iv_picture_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_picture_profile" />
+
+    <TextView
+        android:id="@+id/tv_most_common_acnes"
+        style="@style/Title.HomeSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/most_common_acnes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_most_common_acnes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_most_common_acnes"
+        app:layout_constraintTop_toBottomOf="@id/tv_most_common_acnes" />
+
+    <TextView
+        android:id="@+id/tv_your_daily_read"
+        style="@style/Title.HomeSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/your_daily_read"
+        app:layout_constraintStart_toStartOf="@id/tv_most_common_acnes"
+        app:layout_constraintTop_toBottomOf="@id/rv_most_common_acnes" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_your_daily_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_your_daily_read"
+        app:layout_constraintTop_toBottomOf="@id/tv_your_daily_read" />
 </androidx.constraintlayout.widget.ConstraintLayout>

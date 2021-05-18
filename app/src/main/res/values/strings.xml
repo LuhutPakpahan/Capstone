@@ -15,4 +15,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="i_aggree_the">I aggree the</string>
+    <string name="most_common_acnes">Most Common Acnes</string>
+    <string name="your_daily_read">Your Daily Read</string>
+    <string name="hello_name">Hello, name</string>
 </resources>

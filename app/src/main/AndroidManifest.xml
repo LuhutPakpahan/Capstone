@@ -13,9 +13,7 @@
         <activity android:name=".ui.emailreset.EmailResetActivity" />
         <activity android:name=".ui.specificdetail.SpecificDetail" />
         <activity android:name=".ui.detail.DetailActivity" />
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity android:name=".ui.editprofile.EditProfileActivity" />
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity android:name=".ui.home.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.editprofile.EditProfileActivity" />
+        <activity android:name=".ui.splash.SplashActivity" />
         <activity android:name=".ui.signup.SignupActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
