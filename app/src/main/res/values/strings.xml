@@ -19,4 +19,13 @@
     <string name="most_common_acnes">Most Common Acnes</string>
     <string name="your_daily_read">Your Daily Read</string>
     <string name="hello_name">Hello, name</string>
+    <string name="acne_name">Acne Name</string>
+    <string name="your_acne_is_similar_to_this_type_of_acne_about">Your acne is similar to this type of acne about</string>
+    <string name="long_paragraph_template">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et gravida est. Suspendisse tempus tincidunt efficitur. Donec eu scelerisque dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis rutrum enim in fermentum porta. In luctus eros sed ligula lobortis, sed posuere odio rutrum. Proin sit amet accumsan nibh. Maecenas cursus, odio id laoreet consectetur, diam tellus rhoncus dui, eget scelerisque tellus nunc id lacus. Fusce feugiat dignissim metus nec ullamcorper. Vivamus id metus non diam condimentum rhoncus ut vitae tellus. Cras convallis nibh at purus consectetur maximus. Nunc id nibh ligula. Phasellus pellentesque viverra metus feugiat euismod. </string>
+    <string name="short_paragraph_tempalte">Proin mattis eget leo et egestas. Phasellus accumsan orci nulla. Nulla pretium ligula eu tincidunt venenatis. Nulla facilisi. Ut tincidunt nisi id tortor dictum, at convallis diam finibus. Curabitur sed leo aliquam dui imperdiet ullamcorper eget ac lectus. Donec sed commodo lacus. </string>
+    <string name="what_are_the_causes_of">What are the causes of</string>
+    <string name="tips_for_dealing_with">Tips for dealing with</string>
+    <string name="warning_title">WARNING</string>
+    <string name="the_information_above_is_not_to_preclude_medical_advice">The information above is not to preclude medical advice</string>
+    <string name="feedback">Feedback</string>
 </resources>

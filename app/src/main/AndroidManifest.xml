@@ -11,7 +11,10 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".ui.result.ResultActivity" />
         <activity android:name=".ui.emailreset.EmailResetActivity" />
-        <activity android:name=".ui.specificdetail.SpecificDetail" />
+        <activity android:name=".ui.specificdetail.SpecificDetail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
         <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.editprofile.EditProfileActivity" />

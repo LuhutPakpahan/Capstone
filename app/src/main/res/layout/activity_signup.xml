@@ -191,6 +191,7 @@
         style="@style/Title.Button"
         android:text="@string/sign_up"
         android:background="@drawable/gradient"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/tf_confirm_password"

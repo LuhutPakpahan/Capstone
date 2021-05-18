@@ -1,9 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.specificdetail.SpecificDetail">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_acne_name"
+            style="@style/Title.PossibilityAcne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/acne_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_acne_number_possibility"
+            style="@style/Content.DescriptionPossibilityAcne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/your_acne_is_similar_to_this_type_of_acne_about"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_acne_name" />
+
+        <TextView
+            android:id="@+id/tv_acne_description"
+            style="@style/Content.DescriptionPossibilityAcne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/short_paragraph_tempalte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_acne_number_possibility" />
+
+        <ImageView
+            android:id="@+id/iv_selected_acne"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/gradient"
+            android:src="@drawable/ic_baseline_image_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_acne_description"
+            tools:ignore="ContentDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_other_acne_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/iv_selected_acne"
+            app:layout_constraintStart_toStartOf="@id/iv_selected_acne"
+            app:layout_constraintTop_toBottomOf="@id/iv_selected_acne" />
+
+        <TextView
+            android:id="@+id/tv_title_cause"
+            style="@style/Title.ArticleHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/what_are_the_causes_of"
+            app:layout_constraintStart_toStartOf="@id/tv_acne_description"
+            app:layout_constraintTop_toBottomOf="@id/rv_other_acne_image" />
+
+        <TextView
+            android:id="@+id/tv_cause_of_acne"
+            style="@style/Content.DescriptionPossibilityAcne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/long_paragraph_template"
+            app:layout_constraintEnd_toEndOf="@id/tv_acne_description"
+            app:layout_constraintStart_toStartOf="@id/tv_acne_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_cause" />
+
+        <TextView
+            android:id="@+id/tv_title_tips"
+            style="@style/Title.ArticleHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tips_for_dealing_with"
+            app:layout_constraintStart_toStartOf="@id/tv_title_cause"
+            app:layout_constraintTop_toBottomOf="@id/tv_cause_of_acne" />
+
+        <TextView
+            android:id="@+id/tv_tips_to_deal"
+            style="@style/Content.DescriptionPossibilityAcne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/short_paragraph_tempalte"
+            app:layout_constraintEnd_toEndOf="@id/tv_cause_of_acne"
+            app:layout_constraintStart_toStartOf="@id/tv_cause_of_acne"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_tips" />
+
+        <ImageView
+            android:id="@+id/iv_warning_background"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/warning"
+            app:layout_constraintEnd_toEndOf="@id/tv_tips_to_deal"
+            app:layout_constraintStart_toStartOf="@id/tv_tips_to_deal"
+            app:layout_constraintTop_toBottomOf="@id/tv_tips_to_deal"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_warning_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/opensans_bold"
+            android:text="@string/warning_title"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_warning_background"
+            app:layout_constraintStart_toStartOf="@id/iv_warning_background"
+            app:layout_constraintTop_toTopOf="@id/iv_warning_background" />
+
+        <TextView
+            android:id="@+id/tv_warning_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:text="@string/the_information_above_is_not_to_preclude_medical_advice"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_warning_background"
+            app:layout_constraintEnd_toEndOf="@id/iv_warning_background"
+            app:layout_constraintStart_toStartOf="@id/iv_warning_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_warning_title" />
+
+        <Button
+            android:id="@+id/btn_feedback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/feedback"
+            android:background="@drawable/gradient"
+            android:foreground="?attr/selectableItemBackground"
+            style="@style/Title.Button"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginVertical="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_warning_background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
