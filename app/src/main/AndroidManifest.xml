@@ -9,29 +9,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication" >
-        <activity android:name=".ui.result.ResultActivity" />
-        <activity android:name=".ui.emailreset.EmailResetActivity" />
-        <activity
-            android:name=".ui.specificdetail.SpecificDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-
-        </activity>
-        <activity android:name=".ui.detail.DetailActivity" />
-        <activity android:name=".ui.home.HomeActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ui.result.ResultActivity" android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.HomeActivity" />
+        </activity>
+        <activity android:name=".ui.emailreset.EmailResetActivity" />
+        <activity
+            android:name=".ui.specificdetail.SpecificDetailActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar" >
+
+        </activity>
+        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.home.HomeActivity" android:theme="@style/Theme.MyApplication.NoActionBar">
+
         </activity>
         <activity android:name=".ui.editprofile.EditProfileActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.MyApplication.NoActionBar" >
         </activity>
         <activity
             android:name=".ui.signup.SignupActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.MyApplication.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.login.LoginActivity" />

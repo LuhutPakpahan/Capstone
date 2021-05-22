@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavigationDrawerBinding.inflate(layoutInflater)
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(homeBinding.root)
+        setContentView(binding.root)
 
 
         val drawerButton: ImageView = findViewById(R.id.btn_drawer)
