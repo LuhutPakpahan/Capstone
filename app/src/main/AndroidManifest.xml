@@ -11,7 +11,7 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".ui.result.ResultActivity" />
         <activity android:name=".ui.emailreset.EmailResetActivity" />
-        <activity android:name=".ui.specificdetail.SpecificDetail"
+        <activity android:name=".ui.specificdetail.SpecificDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
