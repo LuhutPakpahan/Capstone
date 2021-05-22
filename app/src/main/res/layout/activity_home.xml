@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity">
-    
+
+    <ImageView
+        android:id="@+id/btn_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_baseline_menu_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <ImageView
         android:id="@+id/iv_picture_profile"
         android:layout_width="30dp"
@@ -43,6 +54,7 @@
         android:id="@+id/rv_most_common_acnes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/tv_most_common_acnes"
         app:layout_constraintTop_toBottomOf="@id/tv_most_common_acnes" />
 
@@ -60,6 +72,7 @@
         android:id="@+id/rv_your_daily_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/tv_your_daily_read"
         app:layout_constraintTop_toBottomOf="@id/tv_your_daily_read" />
 </androidx.constraintlayout.widget.ConstraintLayout>
