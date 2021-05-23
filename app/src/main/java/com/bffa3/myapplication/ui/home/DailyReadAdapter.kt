@@ -17,10 +17,7 @@ class DailyReadAdapter : RecyclerView.Adapter<DailyReadAdapter.CustomViewHolder>
 
     inner class CustomViewHolder(val binding: ItemDailyReadBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
-            with(binding) {
-                tvTitleArticle.text = article.title
-                tvDescriptionArticle.text = article.description
-            }
+
         }
     }
 

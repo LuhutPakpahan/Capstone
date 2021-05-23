@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
         mostCommonAcneAdapter = MostCommonAcneAdapter()
         mostCommonAcneAdapter.setListCommonAcnes(DummyCommonAcne.addDummyAcnes())
-        homeBinding.rvMostCommonAcnes.apply {
+        binding.rvMostCommonAcnes.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
             adapter = mostCommonAcneAdapter
@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         dailyReadAdapter = DailyReadAdapter()
         dailyReadAdapter.setDailyReadList(DummyArticle.addDummyArticle())
-        homeBinding.rvYourDailyRead.apply {
+        binding.rvYourDailyRead.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             setHasFixedSize(true)
             adapter = dailyReadAdapter
