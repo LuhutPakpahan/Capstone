@@ -46,4 +46,6 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="placeholder_name">Placeholder Name</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_of_acne">Name of Acne</string>
+    <string name="result_title">Result</string>
 </resources>
