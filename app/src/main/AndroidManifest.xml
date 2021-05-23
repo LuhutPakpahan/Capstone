@@ -22,11 +22,7 @@
         </activity>
         <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.home.HomeActivity" android:theme="@style/Theme.MyApplication.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.editprofile.EditProfileActivity" />
         <activity
@@ -36,6 +32,12 @@
         <activity
             android:name=".ui.signup.SignupActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.login.LoginActivity" />

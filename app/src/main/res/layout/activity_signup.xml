@@ -10,6 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="40dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/tv_signup"
             style="@style/Title.LoginRegister"
@@ -31,74 +50,54 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_signup" />
 
-        <TextView
-            android:id="@+id/tv_first_name"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/first_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_description" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_first_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:hint="@string/first_name"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
-            app:layout_constraintStart_toStartOf="@id/tv_first_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_first_name">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_last_name"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/last_name"
-            app:layout_constraintStart_toStartOf="@id/tf_last_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_signup_description" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_last_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/last_name"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/tv_last_name">
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_gender"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/gender"
-            app:layout_constraintStart_toStartOf="@id/tv_first_name"
-            app:layout_constraintTop_toBottomOf="@id/tf_first_name" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_gender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:hint="@string/gender"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
-            app:layout_constraintStart_toStartOf="@id/tv_gender"
-            app:layout_constraintTop_toBottomOf="@id/tv_gender">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tf_first_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -106,25 +105,18 @@
                 android:inputType="" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_age"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/age"
-            app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/tf_last_name" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_age"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/age"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_age"
-            app:layout_constraintTop_toBottomOf="@id/tv_age">
+            app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/tf_last_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -132,119 +124,104 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_email"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/email"
-            app:layout_constraintStart_toStartOf="@id/tf_gender"
-            app:layout_constraintTop_toBottomOf="@id/tf_gender" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/email"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/tf_age"
-            app:layout_constraintStart_toStartOf="@id/tv_email"
-            app:layout_constraintTop_toBottomOf="@id/tv_email">
+            app:layout_constraintStart_toStartOf="@id/tf_gender"
+            app:layout_constraintTop_toBottomOf="@id/tf_gender">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_password"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/password"
-            app:layout_constraintStart_toStartOf="@id/tf_email"
-            app:layout_constraintTop_toBottomOf="@id/tf_email" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/password"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/tf_email"
             app:layout_constraintStart_toStartOf="@id/tf_email"
-            app:layout_constraintTop_toBottomOf="@id/tv_password">
+            app:layout_constraintTop_toBottomOf="@id/tf_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_confirm_password"
-            style="@style/Title.Form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/confirm_password"
-            app:layout_constraintStart_toStartOf="@id/tf_password"
-            app:layout_constraintTop_toBottomOf="@id/tf_password" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_confirm_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/white"
+            android:hint="@string/confirm_password"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@id/tf_password"
             app:layout_constraintStart_toStartOf="@id/tf_password"
-            app:layout_constraintTop_toBottomOf="@id/tv_confirm_password">
+            app:layout_constraintTop_toBottomOf="@id/tf_password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            style="@style/Title.Button"
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/gradient"
-            android:foreground="?attr/selectableItemBackground"
-            android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tf_confirm_password"
             app:layout_constraintStart_toStartOf="@id/tf_confirm_password"
-            app:layout_constraintTop_toBottomOf="@id/cb_agreement" />
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement"
+            app:cardCornerRadius="12dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/sign_up"
+                style="@style/Title.Button"
+                android:gravity="center" />
+        </androidx.cardview.widget.CardView>
 
         <CheckBox
             android:id="@+id/cb_agreement"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Content.Agreement"
+            android:textColor="@color/black"
+            android:text="@string/i_aggree_the"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="@id/tf_confirm_password"
             app:layout_constraintTop_toBottomOf="@id/tf_confirm_password" />
 
         <TextView
-            android:id="@+id/tv_i_agree"
+            android:id="@+id/tv_terms_of_use"
             style="@style/Content.Agreement"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="4dp"
-            android:text="@string/i_aggree_the"
-            android:textColor="@color/black"
+            android:text="@string/terms_of_use"
+            android:textColor="#3244E2"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/cb_agreement"
             app:layout_constraintStart_toEndOf="@id/cb_agreement"
             app:layout_constraintTop_toTopOf="@id/cb_agreement" />
-
-        <TextView
-            android:id="@+id/tv_terms_of_use"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terms_of_use"
-            android:textColor="#3244E2"
-            style="@style/Content.Agreement"
-            android:layout_marginStart="4dp"
-            app:layout_constraintStart_toEndOf="@id/tv_i_agree"
-            app:layout_constraintTop_toTopOf="@id/tv_i_agree"
-            app:layout_constraintBottom_toBottomOf="@id/tv_i_agree" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_center_vertical"
