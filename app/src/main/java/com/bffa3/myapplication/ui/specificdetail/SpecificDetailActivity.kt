@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bffa3.myapplication.R
 import com.bffa3.myapplication.databinding.ActivitySpecificDetailBinding
+import com.bffa3.myapplication.utils.DummyAcnePictures
 
 class SpecificDetailActivity : AppCompatActivity() {
 
@@ -18,11 +19,11 @@ class SpecificDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = SpecificDetailAdapter()
-
+        adapter.setListPhoto(DummyAcnePictures.addDummyAcnePictures())
         binding.rvOtherAcneImage.apply {
             layoutManager = LinearLayoutManager(this@SpecificDetailActivity, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
-            adapter = adapter
+            this.adapter = adapter
         }
     }
 }

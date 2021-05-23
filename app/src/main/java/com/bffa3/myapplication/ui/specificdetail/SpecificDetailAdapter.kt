@@ -3,20 +3,22 @@ package com.bffa3.myapplication.ui.specificdetail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bffa3.myapplication.data.entity.AcnePicture
 import com.bffa3.myapplication.databinding.ItemSpecificDetailBinding
 
 class SpecificDetailAdapter() : RecyclerView.Adapter<SpecificDetailAdapter.CustomViewHolder>() {
 
-    private val listPhoto = ArrayList<Int>()
+    private val listPhoto = ArrayList<AcnePicture>()
 
-    fun setListPhoto(listPhoto: List<Int>) {
+    fun setListPhoto(listPhoto: List<AcnePicture>) {
         this.listPhoto.clear()
         this.listPhoto.addAll(listPhoto)
-        notifyDataSetChanged()
     }
 
     inner class CustomViewHolder(val binding: ItemSpecificDetailBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(acnePicture: AcnePicture) {
 
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -24,12 +26,8 @@ class SpecificDetailAdapter() : RecyclerView.Adapter<SpecificDetailAdapter.Custo
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.binding.ivItem.setOnClickListener {
-
-        }
+        holder.bind(listPhoto[position])
     }
 
-    override fun getItemCount(): Int {
-        return listPhoto.size
-    }
+    override fun getItemCount() = listPhoto.size
 }
