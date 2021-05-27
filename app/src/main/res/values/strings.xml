@@ -52,4 +52,29 @@
     <string name="take_a_photo">Take A Photo</string>
     <string name="upload">Upload</string>
     <string name="result">Result</string>
+    <string name="firstname">First Name</string>
+    <string name="profile">Profile</string>
+    <string name="lastname">Last Name</string>
+    <string name="submit">Submit</string>
+    <string name="send">Send</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_forgot_pasword">ForgotPasword</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="other_possi">Other Possibilities</string>
+    <!-- strings.xml -->
+    <string name="cystic_acnet">Cystic acne is one of the most serious acne types of acne. The appearance of this type of acne is usually caused by bacteria, oil, and dry skin cells ...</string>
+    <!-- strings.xml -->
+    <string name="we_have_mad">We have made a prediction from the photo you submitted, we found a number of <number>possibilities</string>
+    <!-- strings.xml -->
+    <string name="your_acne_p">Your Acne Possibility</string>
+    <!-- strings.xml -->
+    <string name="cystic_acne">Cystic Acne</string>
+
 </resources>
