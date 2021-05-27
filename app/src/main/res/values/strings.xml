@@ -52,7 +52,6 @@
     <string name="upload">Upload</string>
     <string name="result">Result</string>
     <string name="firstname">First Name</string>
-    <string name="profile">Profile</string>
     <string name="lastname">Last Name</string>
     <string name="submit">Submit</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -77,5 +76,7 @@
     <string name="forgot_your_password">Forgot your password ?</string>
     <string name="new_here">New here ?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="profile">Profile</string>
+    <string name="fit_in_the_best_of_you">Fit in the best of you</string>
 
 </resources>
