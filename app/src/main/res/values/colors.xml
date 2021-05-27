@@ -14,6 +14,8 @@
     <color name="warning">#EF1A1A</color>
     <color name="gray_color">#5F5F5F</color>
     <color name="blue">#1A73E9</color>
+    <color name="divider_color">#EBECED</color>
+    <color name="highest_possibilities_color">#DF3737</color>
     
     <!-- Text Color -->
     <color name="detail_screen_title">#1F529F</color>

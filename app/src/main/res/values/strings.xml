@@ -67,14 +67,10 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
-    <string name="other_possi">Other Possibilities</string>
-    <!-- strings.xml -->
-    <string name="cystic_acnet">Cystic acne is one of the most serious acne types of acne. The appearance of this type of acne is usually caused by bacteria, oil, and dry skin cells ...</string>
-    <!-- strings.xml -->
-    <string name="we_have_mad">We have made a prediction from the photo you submitted, we found a number of <number>possibilities</string>
-    <!-- strings.xml -->
-    <string name="your_acne_p">Your Acne Possibility</string>
-    <!-- strings.xml -->
-    <string name="cystic_acne">Cystic Acne</string>
+    <string name="your_acne_possibility">Your Acne Possibility</string>
+    <string name="we_have_made_a_prediction_from_the_photo_you_submitted_we_found_a_number_of_s_possibilites">We have made a prediction from the photo you submitted, we found a number of %s possibilites</string>
+    <string name="the_highest_possibilites_s">The highest possibilites - %s%</string>
+    <string name="other_possibilites">Other Possibilites</string>
+    <string name="percentage">%s%</string>
 
 </resources>
