@@ -6,7 +6,6 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="sign_up">Sign Up</string>
     <string name="introduce_yourself">Introduce yourself</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -56,7 +55,6 @@
     <string name="profile">Profile</string>
     <string name="lastname">Last Name</string>
     <string name="submit">Submit</string>
-    <string name="send">Send</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -72,5 +70,12 @@
     <string name="the_highest_possibilites_s">The highest possibilites - %s%</string>
     <string name="other_possibilites">Other Possibilites</string>
     <string name="percentage">%s%</string>
+    <string name="password_title">Password ?</string>
+    <string name="don_t_worry_just_tell_me_your_email">Don\'t worry, just tell me your email</string>
+    <string name="send">Send</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="new_here">New here ?</string>
+    <string name="sign_up">Sign Up</string>
 
 </resources>
