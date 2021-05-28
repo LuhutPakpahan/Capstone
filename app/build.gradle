@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.bffa3.myapplication"
+        applicationId "com.b21cap0398.acnescan"
         minSdkVersion 28
         targetSdkVersion 30
         versionCode 1

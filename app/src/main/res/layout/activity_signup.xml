@@ -14,14 +14,14 @@
             android:id="@+id/civ_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="40dp"
             app:cardElevation="0dp"
-            app:cardCornerRadius="40dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -60,13 +60,17 @@
             android:layout_marginEnd="24dp"
             android:hint="@string/first_name"
             app:boxBackgroundColor="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
             app:layout_constraintEnd_toStartOf="@id/guideline_center_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_signup_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="16" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -78,17 +82,22 @@
             android:layout_marginEnd="24dp"
             android:hint="@string/last_name"
             app:boxBackgroundColor="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
             app:layout_constraintTop_toBottomOf="@id/tv_signup_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="16" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_gender"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -100,9 +109,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tf_first_name">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -114,6 +125,8 @@
             android:layout_marginEnd="24dp"
             android:hint="@string/age"
             app:boxBackgroundColor="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_center_vertical"
             app:layout_constraintTop_toBottomOf="@id/tf_last_name">
@@ -121,7 +134,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="2" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +151,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -147,6 +162,7 @@
             android:layout_marginTop="24dp"
             android:hint="@string/password"
             app:boxBackgroundColor="@color/white"
+            app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="@id/tf_email"
             app:layout_constraintStart_toStartOf="@id/tf_email"
             app:layout_constraintTop_toBottomOf="@id/tf_email">
@@ -154,17 +170,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tf_confirm_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/white"
-            android:hint="@string/confirm_password"
             android:layout_marginTop="24dp"
+            android:hint="@string/confirm_password"
+            app:boxBackgroundColor="@color/white"
+            app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="@id/tf_password"
             app:layout_constraintStart_toStartOf="@id/tf_password"
             app:layout_constraintTop_toBottomOf="@id/tf_password">
@@ -172,20 +188,23 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/civ_sign_up"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tf_confirm_password"
             app:layout_constraintStart_toStartOf="@id/tf_confirm_password"
-            app:layout_constraintTop_toBottomOf="@id/cb_agreement"
-            app:cardCornerRadius="12dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground">
+            app:layout_constraintTop_toBottomOf="@id/cb_agreement">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -194,22 +213,22 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                style="@style/Title.Button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/sign_up"
-                style="@style/Title.Button"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="@string/sign_up" />
         </androidx.cardview.widget.CardView>
 
         <CheckBox
             android:id="@+id/cb_agreement"
-            android:gravity="center"
+            style="@style/Content.Agreement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Content.Agreement"
-            android:textColor="@color/black"
-            android:text="@string/i_aggree_the"
             android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@string/i_aggree_the"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/tf_confirm_password"
             app:layout_constraintTop_toBottomOf="@id/tf_confirm_password" />
 
@@ -219,9 +238,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
+            android:gravity="center"
             android:text="@string/terms_of_use"
             android:textColor="#3244E2"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/cb_agreement"
             app:layout_constraintStart_toEndOf="@id/cb_agreement"
             app:layout_constraintTop_toTopOf="@id/cb_agreement" />
@@ -236,5 +255,15 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <include
+            android:id="@+id/inc_loading"
+            layout="@layout/layout_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

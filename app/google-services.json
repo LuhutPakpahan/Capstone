@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:776779752818:android:fae0d3289b2fc183ad69eb",
+        "mobilesdk_app_id": "1:776779752818:android:256b3446a1fc1102ad69eb",
         "android_client_info": {
-          "package_name": "com.bffa3.myapplication"
+          "package_name": "com.b21cap0398.acnescan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "776779752818-1oei2opp7biibfqd62id09errvq363va.apps.googleusercontent.com",
+          "client_id": "776779752818-fo69nrgkdlaqkmvfvg5nk621vsi866ak.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bffa3.myapplication",
+            "package_name": "com.b21cap0398.acnescan",
             "certificate_hash": "c277787dabdd3c3bedf91b5c68aa8cd0e73435be"
           }
         },

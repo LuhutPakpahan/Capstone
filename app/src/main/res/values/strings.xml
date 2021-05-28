@@ -80,5 +80,11 @@
     <string name="fit_in_the_best_of_you">Fit in the best of you</string>
     <string name="email_has_been_sent">Email has been sent !</string>
     <string name="now_open_your_email_we_have_sent_you_a_link_to_change_the_password_on_your_account_the_link_will_only_be_active_within_1x24_hours">Now open your email, we have sent you a link to change the password on your account. The link will only be active within 1x24 hours.</string>
+    <string name="email_is_not_valid">Email is not valid</string>
+    <string name="password_must_be">Password must be more than 6 characters</string>
+    <string name="first_name_should_be_filled">First name should be filled</string>
+    <string name="gender_should_be_filled">Gender should be filled</string>
+    <string name="age_should_be_filled">Age should be filled</string>
+    <string name="confirm_password_different">Confirm password should be the same as password</string>
 
 </resources>
