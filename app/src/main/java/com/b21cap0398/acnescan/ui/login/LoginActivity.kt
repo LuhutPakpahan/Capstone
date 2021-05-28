@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivityLoginBinding
 import com.b21cap0398.acnescan.ui.forgotpassword.ForgotPasswordActivity
+import com.b21cap0398.acnescan.ui.home.HomeActivity
 import com.b21cap0398.acnescan.ui.signup.SignupActivity
 import com.b21cap0398.acnescan.utils.UserValidationHelper
 import com.google.firebase.FirebaseApp
@@ -29,8 +30,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignIn.setOnClickListener {
+
             val loadingScreen = binding.incLoading.root
             loadingScreen.visibility = View.VISIBLE
+            binding.tvWrongEmailPassword.visibility = View.GONE
 
             val email = binding.tfEmail.editText?.text.toString()
             val password = binding.tfPassword.editText?.text.toString()
@@ -44,9 +47,11 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         } else {
-                            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+                            binding.tvWrongEmailPassword.visibility = View.VISIBLE
                         }
                         loadingScreen.visibility = View.GONE
                     }
