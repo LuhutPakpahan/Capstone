@@ -78,5 +78,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="profile">Profile</string>
     <string name="fit_in_the_best_of_you">Fit in the best of you</string>
+    <string name="email_has_been_sent">Email has been sent !</string>
+    <string name="now_open_your_email_we_have_sent_you_a_link_to_change_the_password_on_your_account_the_link_will_only_be_active_within_1x24_hours">Now open your email, we have sent you a link to change the password on your account. The link will only be active within 1x24 hours.</string>
 
 </resources>
