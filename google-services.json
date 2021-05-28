@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "776779752818",
+    "project_id": "acne-scan",
+    "storage_bucket": "acne-scan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776779752818:android:fae0d3289b2fc183ad69eb",
+        "android_client_info": {
+          "package_name": "com.bffa3.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776779752818-1oei2opp7biibfqd62id09errvq363va.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bffa3.myapplication",
+            "certificate_hash": "c277787dabdd3c3bedf91b5c68aa8cd0e73435be"
+          }
+        },
+        {
+          "client_id": "776779752818-ej2vss02rojrsnonbdnceudjapfb61k0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd7R1kqQC89HMxHsjJNLhAgd-Nc-4mnDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776779752818-ej2vss02rojrsnonbdnceudjapfb61k0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
