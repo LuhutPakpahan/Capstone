@@ -3,7 +3,7 @@ package com.bffa3.myapplication.ui.result.fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bffa3.myapplication.data.entity.ResultAcne
+import com.bffa3.myapplication.data.source.local.entity.ResultAcne
 import com.bffa3.myapplication.databinding.ItemResultBinding
 
 class RejectedListAdapter : RecyclerView.Adapter<RejectedListAdapter.CustomViewHolder>() {

@@ -1,6 +1,6 @@
 package com.bffa3.myapplication.utils
 
-import com.bffa3.myapplication.data.entity.Article
+import com.bffa3.myapplication.data.source.local.entity.Article
 
 object DummyArticle {
     fun addDummyArticle() : List<Article> {

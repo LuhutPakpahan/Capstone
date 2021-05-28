@@ -3,7 +3,7 @@ package com.bffa3.myapplication.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bffa3.myapplication.data.entity.Article
+import com.bffa3.myapplication.data.source.local.entity.Article
 import com.bffa3.myapplication.databinding.ItemDailyReadBinding
 
 class DailyReadAdapter : RecyclerView.Adapter<DailyReadAdapter.CustomViewHolder>() {

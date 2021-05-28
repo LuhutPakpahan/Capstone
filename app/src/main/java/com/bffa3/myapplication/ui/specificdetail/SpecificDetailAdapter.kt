@@ -3,7 +3,7 @@ package com.bffa3.myapplication.ui.specificdetail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bffa3.myapplication.data.entity.AcnePicture
+import com.bffa3.myapplication.data.source.local.entity.AcnePicture
 import com.bffa3.myapplication.databinding.ItemSpecificDetailBinding
 
 class SpecificDetailAdapter() : RecyclerView.Adapter<SpecificDetailAdapter.CustomViewHolder>() {

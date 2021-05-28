@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bffa3.myapplication.R
-import com.bffa3.myapplication.data.entity.ResultAcne
+import com.bffa3.myapplication.data.source.local.entity.ResultAcne
 import com.bffa3.myapplication.databinding.FragmentPendingListBinding
 import com.bffa3.myapplication.utils.DummyResultAcne
 

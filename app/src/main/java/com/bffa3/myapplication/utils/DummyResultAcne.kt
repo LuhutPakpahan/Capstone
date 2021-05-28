@@ -1,6 +1,6 @@
 package com.bffa3.myapplication.utils
 
-import com.bffa3.myapplication.data.entity.ResultAcne
+import com.bffa3.myapplication.data.source.local.entity.ResultAcne
 
 object DummyResultAcne {
     fun addDummyResultAcne() : List<ResultAcne> {

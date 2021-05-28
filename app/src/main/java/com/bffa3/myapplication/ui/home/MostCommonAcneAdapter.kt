@@ -3,7 +3,7 @@ package com.bffa3.myapplication.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bffa3.myapplication.data.entity.CommonAcne
+import com.bffa3.myapplication.data.source.local.entity.CommonAcne
 import com.bffa3.myapplication.databinding.ItemCommonAcnesBinding
 
 class MostCommonAcneAdapter : RecyclerView.Adapter<MostCommonAcneAdapter.CustomViewHolder>() {

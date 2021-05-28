@@ -1,6 +1,6 @@
 package com.bffa3.myapplication.utils
 
-import com.bffa3.myapplication.data.entity.CommonAcne
+import com.bffa3.myapplication.data.source.local.entity.CommonAcne
 
 object DummyCommonAcne {
     fun addDummyAcnes(): List<CommonAcne> {
