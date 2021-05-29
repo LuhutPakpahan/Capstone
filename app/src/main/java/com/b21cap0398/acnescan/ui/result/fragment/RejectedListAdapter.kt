@@ -8,7 +8,13 @@ import com.b21cap0398.acnescan.databinding.ItemResultBinding
 
 class RejectedListAdapter : RecyclerView.Adapter<RejectedListAdapter.CustomViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
     private val resultAcneList = ArrayList<ResultAcne>()
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setList(list: List<ResultAcne>) {
         resultAcneList.clear()
@@ -27,9 +33,14 @@ class RejectedListAdapter : RecyclerView.Adapter<RejectedListAdapter.CustomViewH
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(resultAcneList[position])
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked() }
     }
 
     override fun getItemCount(): Int {
         return resultAcneList.size
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked()
     }
 }

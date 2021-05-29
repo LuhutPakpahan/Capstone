@@ -23,5 +23,9 @@ class SpecificDetailActivity : AppCompatActivity() {
             setHasFixedSize(true)
             this.adapter = adapter
         }
+
+        binding.civBackButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

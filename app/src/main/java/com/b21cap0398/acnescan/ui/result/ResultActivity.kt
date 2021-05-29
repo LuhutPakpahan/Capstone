@@ -37,6 +37,10 @@ class ResultActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
+        binding.cvBackButton.setOnClickListener {
+            onBackPressed()
+        }
+
         supportActionBar?.elevation = 0f
     }
 }

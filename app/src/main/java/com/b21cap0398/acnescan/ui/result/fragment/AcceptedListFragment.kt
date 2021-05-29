@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.result.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.FragmentAcceptedListBinding
+import com.b21cap0398.acnescan.ui.detail.DetailActivity
 import com.b21cap0398.acnescan.utils.DummyResultAcne
 
 class AcceptedListFragment : Fragment() {
@@ -31,6 +33,12 @@ class AcceptedListFragment : Fragment() {
         binding.rvAcceptedList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
+            adapter.setOnItemClickCallback(object : AcceptedListAdapter.OnItemClickCallback {
+                override fun onItemClicked() {
+                    val intent = Intent(requireContext(), DetailActivity::class.java)
+                    startActivity(intent)
+                }
+            })
             this.adapter = adapter
         }
     }
