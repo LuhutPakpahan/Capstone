@@ -8,6 +8,7 @@
     tools:context=".ui.result.ResultActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_back_button"
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"

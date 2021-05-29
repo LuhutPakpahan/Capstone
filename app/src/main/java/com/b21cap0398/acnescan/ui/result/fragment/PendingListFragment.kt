@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.result.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.FragmentPendingListBinding
+import com.b21cap0398.acnescan.ui.detail.DetailActivity
 import com.b21cap0398.acnescan.utils.DummyResultAcne
 
 class PendingListFragment : Fragment() {
@@ -31,6 +33,13 @@ class PendingListFragment : Fragment() {
         binding.rvPendingList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
+            adapter.setOnItemClickCallback(object : PendingListAdapter.OnItemClickCallback {
+                override fun onItemClicked() {
+                    val intent = Intent(requireContext(), DetailActivity::class.java)
+                    startActivity(intent)
+                }
+
+            })
             this.adapter = adapter
         }
     }

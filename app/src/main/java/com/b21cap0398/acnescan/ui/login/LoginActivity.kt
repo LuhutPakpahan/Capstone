@@ -3,79 +3,132 @@ package com.b21cap0398.acnescan.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivityLoginBinding
 import com.b21cap0398.acnescan.ui.forgotpassword.ForgotPasswordActivity
+import com.b21cap0398.acnescan.ui.home.HomeActivity
 import com.b21cap0398.acnescan.ui.signup.SignupActivity
 import com.b21cap0398.acnescan.utils.UserValidationHelper
-import com.google.firebase.FirebaseApp
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
+    // Binding
     private lateinit var binding: ActivityLoginBinding
 
+    // Firebase
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-    init {
-        FirebaseApp.initializeApp(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSigninOnClickListener()
+        setSignupOnClickListener()
+        setForgotPasswordOnClickListener()
+    }
+
+    private fun setSigninOnClickListener() {
         binding.btnSignIn.setOnClickListener {
-            val loadingScreen = binding.incLoading.root
-            loadingScreen.visibility = View.VISIBLE
 
-            val email = binding.tfEmail.editText?.text.toString()
-            val password = binding.tfPassword.editText?.text.toString()
+            showLoading()
 
-            if (UserValidationHelper.isValidPassword(password) &&
-                UserValidationHelper.isValidEmail(email)
-            ) {
-                binding.tfEmail.isErrorEnabled = false
-                binding.tfPassword.isErrorEnabled = false
+            binding.apply {
 
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-                        }
-                        loadingScreen.visibility = View.GONE
+                val email = tfEmail.editText?.text.toString()
+                val password = tfPassword.editText?.text.toString()
+
+                if (UserValidationHelper.isValidPassword(password) &&
+                    UserValidationHelper.isValidEmail(email)
+                ) {
+                    resetErrorState()
+                    signinToFirebase(email, password)
+                } else {
+                    if (!UserValidationHelper.isValidEmail(email)) {
+                        showFieldError(tfEmail, getString(R.string.email_is_not_valid))
+                    } else {
+                        hideFieldError(tfEmail)
                     }
-            } else {
-                if (!UserValidationHelper.isValidEmail(email)) {
-                    binding.tfEmail.isErrorEnabled = true
-                    binding.tfEmail.error = getString(R.string.email_is_not_valid)
-                } else {
-                    binding.tfEmail.isErrorEnabled = false
+
+                    if (!UserValidationHelper.isValidPassword(password)) {
+                        showFieldError(tfPassword, getString(R.string.password_must_be))
+                    } else {
+                        hideFieldError(tfPassword)
+                    }
                 }
 
-                if (!UserValidationHelper.isValidPassword(password)) {
-                    binding.tfPassword.isErrorEnabled = true
-                    binding.tfPassword.error = getString(R.string.password_must_be)
-                } else {
-                    binding.tfPassword.isErrorEnabled = true
-                }
-                loadingScreen.visibility = View.GONE
+                finishLoading()
             }
         }
+    }
 
-        binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
-
+    private fun setForgotPasswordOnClickListener() {
         binding.tvForgotYourPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun setSignupOnClickListener() {
+        binding.tvSignup.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
+    private fun finishLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.VISIBLE
+        binding.tvWrongEmailPassword.visibility = View.GONE
+    }
+
+    private fun <T> showFieldError(v: T, errorText: String? = null) {
+        when (v) {
+            is TextInputLayout -> {
+                v.isErrorEnabled = true
+                v.error = errorText
+            }
+            is TextView -> {
+                v.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun <T> hideFieldError(v: T) {
+        when (v) {
+            is TextInputLayout -> {
+                v.isErrorEnabled = false
+            }
+        }
+    }
+
+    private fun resetErrorState() {
+        binding.apply {
+            tfEmail.isErrorEnabled = false
+            tfPassword.isErrorEnabled = false
+        }
+    }
+
+    private fun signinToFirebase(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this@LoginActivity) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showFieldError(binding.tvWrongEmailPassword)
+                }
+            }
     }
 }

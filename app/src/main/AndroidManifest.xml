@@ -13,36 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:ignore="AllowBackup">
+
         <activity android:name="com.b21cap0398.acnescan.ui.result.ResultActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.b21cap0398.acnescan.ui.home.HomeActivity" />
         </activity>
+
         <activity android:name="com.b21cap0398.acnescan.ui.emailreset.EmailResetActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar"/>
+
         <activity
             android:name="com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" >
         </activity>
-        <activity android:name="com.b21cap0398.acnescan.ui.detail.DetailActivity" />
+
+        <activity android:name="com.b21cap0398.acnescan.ui.detail.DetailActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar"/>
+
         <activity android:name="com.b21cap0398.acnescan.ui.home.HomeActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar">
 
         </activity>
-        <activity android:name="com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity" />
+
+        <activity android:name="com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar"/>
+
         <activity
             android:name="com.b21cap0398.acnescan.ui.splash.SplashActivity"
-            android:theme="@style/Theme.MyApplication.NoActionBar" >
-        </activity>
-        <activity
-            android:name="com.b21cap0398.acnescan.ui.signup.SignupActivity"
-            android:theme="@style/Theme.MyApplication.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.b21cap0398.acnescan.ui.login.LoginActivity" />
-        </activity>
-        <activity android:name="com.b21cap0398.acnescan.ui.login.LoginActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,13 +49,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.b21cap0398.acnescan.ui.signup.SignupActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.b21cap0398.acnescan.ui.login.LoginActivity" />
+        </activity>
+
+        <activity android:name="com.b21cap0398.acnescan.ui.login.LoginActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar" >
+
+        </activity>
+
         <activity
             android:name="com.b21cap0398.acnescan.ui.forgotpassword.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/Theme.MyApplication.NoActionBar">
+
         </activity>
+
         <activity android:name="com.b21cap0398.acnescan.MainActivity" >
+
         </activity>
+
     </application>
 
 </manifest>

@@ -150,7 +150,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/sign_up"
+            android:text="@string/edit"
             style="@style/Title.Button"
             android:gravity="center" />
     </androidx.cardview.widget.CardView>
