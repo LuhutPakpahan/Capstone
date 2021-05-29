@@ -8,7 +8,10 @@ import com.b21cap0398.acnescan.utils.DummyAcnePictures
 
 class SpecificDetailActivity : AppCompatActivity() {
 
+    // Binding
     private lateinit var binding: ActivitySpecificDetailBinding
+
+    // Adapter
     private lateinit var adapter: SpecificDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +19,12 @@ class SpecificDetailActivity : AppCompatActivity() {
         binding = ActivitySpecificDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSpecificDetailAdapter()
+
+        setBackButtonOnClickListener()
+    }
+
+    private fun setSpecificDetailAdapter() {
         adapter = SpecificDetailAdapter()
         adapter.setListPhoto(DummyAcnePictures.addDummyAcnePictures())
         binding.rvOtherAcneImage.apply {
@@ -23,7 +32,9 @@ class SpecificDetailActivity : AppCompatActivity() {
             setHasFixedSize(true)
             this.adapter = adapter
         }
+    }
 
+    private fun setBackButtonOnClickListener() {
         binding.civBackButton.setOnClickListener {
             onBackPressed()
         }

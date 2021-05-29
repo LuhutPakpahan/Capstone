@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     UserValidationHelper.isValidEmail(email)
                 ) {
                     resetErrorState()
-                    loginToFirebase(email, password)
+                    signinToFirebase(email, password)
                 } else {
                     if (!UserValidationHelper.isValidEmail(email)) {
                         showFieldError(tfEmail, getString(R.string.email_is_not_valid))
@@ -119,7 +119,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginToFirebase(email: String, password: String) {
+    private fun signinToFirebase(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this@LoginActivity) { task ->
                 if (task.isSuccessful) {
