@@ -24,25 +24,69 @@ import com.google.firebase.auth.FirebaseAuth
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
 
+    // Binding
     private lateinit var binding: ActivityHomeNavigationDrawerBinding
-    private lateinit var homeBinding: ActivityHomeBinding
 
+    // Adapter for common acne and daily read
     private lateinit var mostCommonAcneAdapter: MostCommonAcneAdapter
     private lateinit var dailyReadAdapter: DailyReadAdapter
 
+    // Firebase
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavigationDrawerBinding.inflate(layoutInflater)
-        homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setMainButtonOnClickListener()
+        setEditProfileOnClickListener()
+        setDrawerOnClickListener()
+
+        setMostCommonAcneAdapter()
+        setDailyReadAdapter()
+    }
+
+    private fun setDailyReadAdapter() {
+        dailyReadAdapter = DailyReadAdapter()
+        dailyReadAdapter.setDailyReadList(DummyArticle.addDummyArticle())
+        binding.rvYourDailyRead.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            setHasFixedSize(true)
+            adapter = dailyReadAdapter
+        }
+    }
+
+    private fun setMostCommonAcneAdapter() {
+        mostCommonAcneAdapter = MostCommonAcneAdapter()
+        mostCommonAcneAdapter.setListCommonAcnes(DummyCommonAcne.addDummyAcnes())
+        binding.rvMostCommonAcnes.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = mostCommonAcneAdapter
+        }
+    }
+
+    private fun setDrawerOnClickListener() {
+        val drawerButton: ImageView = findViewById(R.id.btn_drawer)
+
+        drawerButton.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        binding.navView.setNavigationItemSelectedListener(this)
+
+        binding.navView.getHeaderView(0).setOnClickListener(this)
+    }
+
+    private fun setEditProfileOnClickListener() {
         binding.ivPictureProfile.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun setMainButtonOnClickListener() {
         binding.civResult.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
             startActivity(intent)
@@ -57,32 +101,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Choose a picture"), RequestCodes.TAKE_GALLERY_IMAGE)
-        }
-
-        val drawerButton: ImageView = findViewById(R.id.btn_drawer)
-
-        drawerButton.setOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        binding.navView.setNavigationItemSelectedListener(this)
-
-        binding.navView.getHeaderView(0).setOnClickListener(this)
-
-        mostCommonAcneAdapter = MostCommonAcneAdapter()
-        mostCommonAcneAdapter.setListCommonAcnes(DummyCommonAcne.addDummyAcnes())
-        binding.rvMostCommonAcnes.apply {
-            layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            adapter = mostCommonAcneAdapter
-        }
-
-        dailyReadAdapter = DailyReadAdapter()
-        dailyReadAdapter.setDailyReadList(DummyArticle.addDummyArticle())
-        binding.rvYourDailyRead.apply {
-            layoutManager = LinearLayoutManager(this@HomeActivity)
-            setHasFixedSize(true)
-            adapter = dailyReadAdapter
         }
     }
 
