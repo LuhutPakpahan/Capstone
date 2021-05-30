@@ -1,17 +1,19 @@
 package com.b21cap0398.acnescan.ui.home
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
-import com.b21cap0398.acnescan.databinding.ActivityHomeBinding
 import com.b21cap0398.acnescan.databinding.ActivityHomeNavigationDrawerBinding
+import com.b21cap0398.acnescan.tflife.Classifier
 import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
 import com.b21cap0398.acnescan.ui.login.LoginActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
@@ -34,6 +36,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // Firebase
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    private lateinit var classifier: Classifier.Classifier
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavigationDrawerBinding.inflate(layoutInflater)
@@ -45,6 +49,25 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setMostCommonAcneAdapter()
         setDailyReadAdapter()
+
+        initClassifier()
+    }
+
+    private fun initClassifier() {
+        val mInputSize : Int = 180
+        val mLabelPath = "custom_labels.txt"
+        val mModelPath = "acnescan_V5.tflite"
+        classifier = Classifier.Classifier(assets, mModelPath, mLabelPath, mInputSize)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RequestCodes.TAKE_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            val filepath = data.data!!
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
+
+            val result = classifier.recognizeImage(bitmap)
+        }
     }
 
     private fun setDailyReadAdapter() {
@@ -61,7 +84,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mostCommonAcneAdapter = MostCommonAcneAdapter()
         mostCommonAcneAdapter.setListCommonAcnes(DummyCommonAcne.addDummyAcnes())
         binding.rvMostCommonAcnes.apply {
-            layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
             adapter = mostCommonAcneAdapter
         }
@@ -100,13 +124,16 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Choose a picture"), RequestCodes.TAKE_GALLERY_IMAGE)
+            startActivityForResult(
+                Intent.createChooser(intent, "Choose a picture"),
+                RequestCodes.TAKE_GALLERY_IMAGE
+            )
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.nav_log_out -> {
                 auth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)

@@ -1,5 +1,7 @@
 package com.b21cap0398.acnescan.data.source.firebase
 
+import com.b21cap0398.acnescan.utils.EndpointHelper
+
 class FirebaseDataSource {
     companion object {
         @Volatile
@@ -11,7 +13,9 @@ class FirebaseDataSource {
             }
     }
 
-    suspend fun getResultsAcneScan() {}
+    suspend fun getResultsAcneScan(email: String):  {
+        EndpointHelper.resultsScanRef(email).get().d
+    }
 
     suspend fun uploadAcneImage() {}
 
