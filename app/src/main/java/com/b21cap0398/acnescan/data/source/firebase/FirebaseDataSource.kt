@@ -1,6 +1,11 @@
 package com.b21cap0398.acnescan.data.source.firebase
 
-import com.b21cap0398.acnescan.utils.EndpointHelper
+import com.b21cap0398.acnescan.data.source.local.entity.AcneScanResult
+import com.b21cap0398.acnescan.data.source.local.entity.Possibility
+import com.b21cap0398.acnescan.utils.helper.EndpointHelper
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentSnapshot
+import java.util.*
 
 class FirebaseDataSource {
     companion object {
@@ -13,17 +18,35 @@ class FirebaseDataSource {
             }
     }
 
-    suspend fun getResultsAcneScan(email: String):  {
-        EndpointHelper.resultsScanRef(email).get().d
+    suspend fun getAcneScanResult(email: String, pos: Int) : AcneScanResult {
+        var result: AcneScanResult? = null
+
+        val acneResultDocument = EndpointHelper.getAcneScanResultReference(email, pos)
+        val possibilitiesReference = acneResultDocument.collection("possibilities")
+        val possibilities = arrayListOf<Possibility>()
+
+
+        possibilitiesReference.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                val possibility = Possibility(
+                    acne_name = document["acne_name"] as String,
+                    possibility = document["possibility"] as Int
+                )
+
+                possibilities.add(possibility)
+            }
+        }
+
+        acneResultDocument.get().addOnSuccessListener { document ->
+            if (document != null) {
+                result = AcneScanResult(
+                    imagePath = document["imagePath"] as String,
+                    date = document["date"] as String,
+                    possibilities = possibilities
+                )
+            }
+        }
+
+        return result as AcneScanResult
     }
-
-    suspend fun uploadAcneImage() {}
-
-    suspend fun getDailyArticleAcne() {}
-
-    suspend fun getMostCommonAcne() {}
-
-    suspend fun getUserProfile() {}
-
-    suspend fun setUserProfile() {}
 }

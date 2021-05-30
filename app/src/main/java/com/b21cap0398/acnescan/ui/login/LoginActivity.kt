@@ -10,7 +10,7 @@ import com.b21cap0398.acnescan.databinding.ActivityLoginBinding
 import com.b21cap0398.acnescan.ui.forgotpassword.ForgotPasswordActivity
 import com.b21cap0398.acnescan.ui.home.HomeActivity
 import com.b21cap0398.acnescan.ui.signup.SignupActivity
-import com.b21cap0398.acnescan.utils.UserValidationHelper
+import com.b21cap0398.acnescan.utils.helper.UserValidationHelper
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 

@@ -8,7 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivitySignupBinding
-import com.b21cap0398.acnescan.utils.UserValidationHelper
+import com.b21cap0398.acnescan.utils.helper.UserValidationHelper
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 

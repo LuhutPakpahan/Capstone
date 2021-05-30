@@ -7,7 +7,6 @@ import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,8 +16,8 @@ import com.b21cap0398.acnescan.tflife.Classifier
 import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
 import com.b21cap0398.acnescan.ui.login.LoginActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
-import com.b21cap0398.acnescan.utils.DummyArticle
-import com.b21cap0398.acnescan.utils.DummyCommonAcne
+import com.b21cap0398.acnescan.utils.dummydata.DummyArticle
+import com.b21cap0398.acnescan.utils.dummydata.DummyCommonAcne
 import com.b21cap0398.acnescan.utils.RequestCodes
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth

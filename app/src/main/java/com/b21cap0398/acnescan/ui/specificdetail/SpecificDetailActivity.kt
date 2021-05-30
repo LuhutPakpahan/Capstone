@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.databinding.ActivitySpecificDetailBinding
-import com.b21cap0398.acnescan.utils.DummyAcnePictures
+import com.b21cap0398.acnescan.utils.dummydata.DummyAcnePictures
 
 class SpecificDetailActivity : AppCompatActivity() {
 

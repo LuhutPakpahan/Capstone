@@ -4,11 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.data.source.local.entity.OtherPossibility
 import com.b21cap0398.acnescan.databinding.ActivityDetailBinding
 import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailActivity
-import com.b21cap0398.acnescan.utils.DummyOtherPossibilities
+import com.b21cap0398.acnescan.utils.dummydata.DummyOtherPossibilities
 
 class DetailActivity : AppCompatActivity() {
 

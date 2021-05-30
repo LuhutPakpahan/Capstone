@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.FragmentRejectedListBinding
 import com.b21cap0398.acnescan.ui.detail.DetailActivity
-import com.b21cap0398.acnescan.utils.DummyResultAcne
+import com.b21cap0398.acnescan.utils.dummydata.DummyResultAcne
 
 class RejectedListFragment : Fragment() {
 

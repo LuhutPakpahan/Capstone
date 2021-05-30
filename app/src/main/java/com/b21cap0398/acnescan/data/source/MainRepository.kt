@@ -1,11 +1,13 @@
 package com.b21cap0398.acnescan.data.source
 
+import androidx.lifecycle.LiveData
 import com.b21cap0398.acnescan.data.source.firebase.FirebaseDataSource
+import com.b21cap0398.acnescan.data.source.local.entity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class MainRepository private constructor(private val firebaseDataSource: FirebaseDataSource): MainDataSource{
+class MainRepository(private val firebaseDataSource: FirebaseDataSource): MainDataSource{
 
     companion object {
         @Volatile
@@ -17,39 +19,33 @@ class MainRepository private constructor(private val firebaseDataSource: Firebas
             }
     }
 
-    override fun getDailyArticleAcne() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.getDailyArticleAcne()
-        }
+    override fun getAcneScanResult(email: String, pos: Int): LiveData<AcneScanResult> {
+        TODO("Not yet implemented")
     }
 
-    override fun getMostCommonAcne() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.getMostCommonAcne()
-        }
+    override fun getAcneInformationById(acneId: String): LiveData<AcneInformation> {
+        TODO("Not yet implemented")
     }
 
-    override fun getResultsAcneScan() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.getResultsAcneScan()
-        }
+    override fun getUserInformation(email: String): LiveData<UserInformation> {
+        TODO("Not yet implemented")
     }
 
-    override fun uploadAcneImage() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.setUserProfile()
-        }
+    override fun setUserInformation(email: String) {
+        TODO("Not yet implemented")
     }
 
-    override fun getUserProfile() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.getUserProfile()
-        }
+    override fun getMostCommonAcnes(): LiveData<List<CommonAcne>> {
+        TODO("Not yet implemented")
     }
 
-    override fun setUserProfile() {
-        CoroutineScope(IO).launch {
-            firebaseDataSource.setUserProfile()
-        }
+    override fun getDailyRead(): LiveData<List<Article>> {
+        TODO("Not yet implemented")
     }
+
+    override fun getAllAcneScanResult(email: String): LiveData<List<AcneScanResult>> {
+        TODO("Not yet implemented")
+    }
+
+
 }

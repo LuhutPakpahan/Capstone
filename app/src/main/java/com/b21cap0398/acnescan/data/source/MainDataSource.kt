@@ -1,16 +1,21 @@
 package com.b21cap0398.acnescan.data.source
 
+import androidx.lifecycle.LiveData
+import com.b21cap0398.acnescan.data.source.local.entity.*
+
 interface MainDataSource {
 
-    fun getResultsAcneScan() {}
+    fun getAcneScanResult(email: String, pos: Int) : LiveData<AcneScanResult>
 
-    fun uploadAcneImage() {}
+    fun getAcneInformationById(acneId: String) : LiveData<AcneInformation>
 
-    fun getDailyArticleAcne() {}
+    fun getUserInformation(email: String) : LiveData<UserInformation>
 
-    fun getMostCommonAcne() {}
+    fun setUserInformation(email: String)
 
-    fun getUserProfile() {}
+    fun getMostCommonAcnes() : LiveData<List<CommonAcne>>
 
-    fun setUserProfile() {}
+    fun getDailyRead() : LiveData<List<Article>>
+
+    fun getAllAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
 }
