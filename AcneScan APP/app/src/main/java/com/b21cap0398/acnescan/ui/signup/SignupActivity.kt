@@ -131,7 +131,6 @@ class SignupActivity : AppCompatActivity() {
     private fun showLoading() {
         val loadingScreen = binding.incLoading.root
         loadingScreen.visibility = View.VISIBLE
-
     }
 
     private fun hideLoading() {
