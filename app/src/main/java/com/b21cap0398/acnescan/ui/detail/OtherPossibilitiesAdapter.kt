@@ -1,19 +1,22 @@
 package com.b21cap0398.acnescan.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.data.source.local.entity.OtherPossibility
+import com.b21cap0398.acnescan.data.source.local.entity.Possibility
 import com.b21cap0398.acnescan.databinding.ItemOtherAcnePossibilityBinding
 
 class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter.CustomViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    private val otherPossibilities = ArrayList<OtherPossibility>()
+    private val otherPossibilities = ArrayList<Possibility>()
 
-    fun setList(list: List<OtherPossibility>) {
+    fun setList(list: List<Possibility>) {
         otherPossibilities.clear()
         otherPossibilities.addAll(list)
     }
@@ -23,10 +26,11 @@ class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter
     }
 
     inner class CustomViewHolder(val binding: ItemOtherAcnePossibilityBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: OtherPossibility) {
-            binding.tvNameOfAcne.text = data.titleAcne
-            binding.tvPercentageOfAcne.text = data.percentage
-            binding.tvDescOfAcne.text = data.description
+        @SuppressLint("SetTextI18n")
+        fun bind(data: Possibility) {
+            binding.tvNameOfAcne.text = data.acne_name
+            val possibilityNumber = data.possibility.toString()
+            binding.tvPercentageOfAcne.text = "Possibility: $possibilityNumber %"
         }
     }
 
@@ -50,6 +54,6 @@ class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: OtherPossibility)
+        fun onItemClicked(data: Possibility)
     }
 }

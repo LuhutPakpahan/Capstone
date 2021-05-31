@@ -7,7 +7,7 @@ import com.b21cap0398.acnescan.data.source.local.entity.CommonAcne
 
 class HomeViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun getMostCommonAcnes(): LiveData<List<CommonAcne>>
+    //fun getMostCommonAcnes(): LiveData<List<CommonAcne>>
 
-    fun getDailyRead(): LiveData<List<DailyRead>>
+    //fun getDailyRead(): LiveData<List<DailyRead>>
 }

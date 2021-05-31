@@ -5,7 +5,9 @@ import com.b21cap0398.acnescan.data.source.local.entity.*
 
 interface MainDataSource {
 
-    fun getAcneScanResult(email: String, pos: Int) : LiveData<AcneScanResult>
+    fun getAcneScanResult(email: String, result_id: String) : LiveData<AcneScanResult>
+
+    fun getAllPossibilites(email: String, result_id: String) : LiveData<List<Possibility>>
 
     fun getAcneInformationById(acneId: String) : LiveData<AcneInformation>
 
@@ -17,5 +19,9 @@ interface MainDataSource {
 
     fun getDailyRead() : LiveData<List<Article>>
 
-    fun getAllAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+    fun getAllAcceptedAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+
+    fun getAllPendingAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+
+    fun getAllRejectedAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
 }

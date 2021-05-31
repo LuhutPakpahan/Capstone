@@ -14,11 +14,11 @@ object EndpointHelper {
         return db.collection("users").document(email)
     }
 
-    fun getAcneScanResultReference(email: String, pos: Int) : DocumentReference {
-        return getUserDocumentReference(email).collection("results").document("result_$pos")
+    fun getAcneScanResultReference(email: String, result_id: String) : DocumentReference {
+        return getUserDocumentReference(email).collection("results").document(result_id)
     }
 
-    fun getSpecificDetailReference(acneId: String) : DocumentReference {
+    fun getAcneInformationReference(acneId: String) : DocumentReference {
         return db.collection("acnes").document(acneId)
     }
 
@@ -32,5 +32,9 @@ object EndpointHelper {
 
     fun getAllAcneScanResult(email: String) : CollectionReference {
         return getUserDocumentReference(email).collection("results")
+    }
+
+    fun getAllPossibilitesReference(email: String, result_id: String) : CollectionReference {
+        return getAcneScanResultReference(email, result_id).collection("possibilities")
     }
 }

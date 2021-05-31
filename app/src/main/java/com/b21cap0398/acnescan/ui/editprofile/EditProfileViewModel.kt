@@ -6,5 +6,5 @@ import com.b21cap0398.acnescan.data.source.MainRepository
 
 class EditProfileViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun getUserInformation(email: String) : LiveData<UserInformation> = mainRepository.getUserInformation(email)
+    //fun getUserInformation(email: String) : LiveData<UserInformation> = mainRepository.getUserInformation(email)
 }
