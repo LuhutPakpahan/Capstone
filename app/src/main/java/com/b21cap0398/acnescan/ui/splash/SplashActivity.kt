@@ -24,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
 
     init {
         FirebaseApp.initializeApp(this)
+        auth.currentUser?.reload()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,14 +1,16 @@
 package com.b21cap0398.acnescan.ui.signup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivitySignupBinding
 import com.b21cap0398.acnescan.utils.helper.UserValidationHelper
+import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,10 +22,15 @@ class SignupActivity : AppCompatActivity() {
 
     private val items = listOf<String>("Man", "Woman")
 
+    private lateinit var viewModel: SignupViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val factory = ViewModelFactory.getInstance()
+        viewModel = ViewModelProvider(this, factory)[SignupViewModel::class.java]
 
         setGenderItems()
         setBackButtonOnClickListener()
@@ -39,23 +46,44 @@ class SignupActivity : AppCompatActivity() {
                 val firstName = tfFirstName.editText?.text.toString()
                 val lastName = tfLastName.editText?.text.toString()
                 val gender = tfGender.editText?.text.toString()
-                val age = tfAge.editText?.text.toString()
+                val age = tfAge.editText?.text.toString().toLong()
                 val email = tfEmail.editText?.text.toString()
                 val password = tfPassword.editText?.text.toString()
                 val confirmPassword = tfConfirmPassword.editText?.text.toString()
 
-                if (signupIsValid(firstName, lastName, gender, age, email, password, confirmPassword) && cbAgreement.isChecked) {
+                if (signupIsValid(
+                        firstName,
+                        lastName,
+                        gender,
+                        age,
+                        email,
+                        password,
+                        confirmPassword
+                    ) && cbAgreement.isChecked
+                ) {
                     singupToFirebase(email, password)
-                }
-                else {
+                    viewModel.setUserInformation(
+                        email = email,
+                        firstName = firstName,
+                        lastName = lastName,
+                        gender = gender,
+                        age = age
+                    )
+                } else {
                     // if first name is empty
                     if (!UserValidationHelper.isValidField(firstName))
-                        showFieldErrorWithCounter(tfFirstName, getString(R.string.first_name_should_be_filled))
+                        showFieldErrorWithCounter(
+                            tfFirstName,
+                            getString(R.string.first_name_should_be_filled)
+                        )
                     else hideFieldErrorWithCounter(tfFirstName)
 
                     // if last name is empty
                     if (!UserValidationHelper.isValidField(lastName))
-                        showFieldErrorWithCounter(tfLastName, getString(R.string.last_name_should_be_filled))
+                        showFieldErrorWithCounter(
+                            tfLastName,
+                            getString(R.string.last_name_should_be_filled)
+                        )
                     else hideFieldErrorWithCounter(tfLastName)
 
                     // if gender is empty
@@ -64,7 +92,7 @@ class SignupActivity : AppCompatActivity() {
                     else hideFieldError(tfGender)
 
                     // if age is empty
-                    if (!UserValidationHelper.isValidField(age))
+                    if (!UserValidationHelper.isValidField(age.toString()))
                         showFieldError(tfAge, getString(R.string.age_should_be_filled))
                     else hideFieldError(tfAge)
 
@@ -84,7 +112,10 @@ class SignupActivity : AppCompatActivity() {
 
                     // if confirm password is different from password
                     else if (confirmPassword != password)
-                        showFieldError(tfConfirmPassword, getString(R.string.confirm_password_different))
+                        showFieldError(
+                            tfConfirmPassword,
+                            getString(R.string.confirm_password_different)
+                        )
                     else hideFieldError(tfConfirmPassword)
                 }
                 hideLoading()
@@ -96,10 +127,13 @@ class SignupActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this@SignupActivity) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this@SignupActivity, "${auth.currentUser?.email} has been created", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SignupActivity,
+                        "${auth.currentUser?.email} has been created",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     onBackPressed()
-                }
-                else {
+                } else {
                     Toast.makeText(this@SignupActivity, "Sign up failed", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -116,12 +150,20 @@ class SignupActivity : AppCompatActivity() {
         (binding.tfGender.editText as AutoCompleteTextView).setAdapter(adapter)
     }
 
-    private fun signupIsValid(firstName: String, lastName: String, gender: String, age: String, email: String, password: String, confirmPassword: String) : Boolean {
+    private fun signupIsValid(
+        firstName: String,
+        lastName: String,
+        gender: String,
+        age: Long,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
         UserValidationHelper.apply {
             return isValidField(firstName) &&
                     isValidField(lastName) &&
                     isValidField(gender) &&
-                    isValidField(age) &&
+                    isValidField(age.toString()) &&
                     isValidEmail(email) &&
                     isValidPassword(password) &&
                     password == confirmPassword
@@ -138,8 +180,8 @@ class SignupActivity : AppCompatActivity() {
         loadingScreen.visibility = View.GONE
     }
 
-    private fun<T> showFieldError(v: T, errorText: String) {
-        when(v) {
+    private fun <T> showFieldError(v: T, errorText: String) {
+        when (v) {
             is TextInputLayout -> {
                 v.isErrorEnabled = true
                 v.error = errorText
@@ -147,16 +189,16 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun<T> hideFieldError(v: T) {
-        when(v) {
+    private fun <T> hideFieldError(v: T) {
+        when (v) {
             is TextInputLayout -> {
                 v.isErrorEnabled = false
             }
         }
     }
 
-    private fun<T> showFieldErrorWithCounter(v: T, errorText: String) {
-        when(v) {
+    private fun <T> showFieldErrorWithCounter(v: T, errorText: String) {
+        when (v) {
             is TextInputLayout -> {
                 v.isErrorEnabled = true
                 v.isCounterEnabled = false
@@ -165,8 +207,8 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun<T> hideFieldErrorWithCounter(v: T) {
-        when(v) {
+    private fun <T> hideFieldErrorWithCounter(v: T) {
+        when (v) {
             is TextInputLayout -> {
                 v.isErrorEnabled = false
                 v.isCounterEnabled = true

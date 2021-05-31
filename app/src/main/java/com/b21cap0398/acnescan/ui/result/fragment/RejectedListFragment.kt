@@ -28,6 +28,9 @@ class RejectedListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRejectedListBinding.bind(view)
 
+        hideEmptyListWarning()
+        binding.progressBar.visibility = View.VISIBLE
+
         val adapter = RejectedListAdapter()
         adapter.setList(DummyResultAcne.addDummyResultAcne())
         binding.rvRejectedList.apply {
@@ -42,5 +45,20 @@ class RejectedListFragment : Fragment() {
             })
             this.adapter = adapter
         }
+
+        if (adapter.itemCount <= 0) {
+            showEmptyListWarning()
+        }
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.VISIBLE
+    }
+
+    private fun hideEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.GONE
     }
 }

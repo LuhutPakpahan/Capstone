@@ -15,6 +15,7 @@
         android:layout_marginBottom="12dp"
         android:src="@drawable/acne_scan_splashscreen"
         app:civ_border_color="@color/gradient_darker"
+        android:clickable="true"
         app:civ_border_width="2dp" />
 
     <TextView
@@ -23,16 +24,4 @@
         style="@style/Title.Profile_Name"
         android:textSize="16sp"
         android:text="@string/placeholder_name" />
-
-    <TextView
-        android:id="@+id/tv_edit_profile"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:textColor="@color/gradient_darker"
-        android:text="@string/edit_profile"
-        android:fontFamily="@font/roboto_black"
-        android:textSize="12sp"
-        android:layout_marginBottom="24dp"/>
 </LinearLayout>

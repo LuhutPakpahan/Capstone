@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivityHomeNavigationDrawerBinding
@@ -19,6 +21,7 @@ import com.b21cap0398.acnescan.ui.result.ResultActivity
 import com.b21cap0398.acnescan.utils.dummydata.DummyArticle
 import com.b21cap0398.acnescan.utils.dummydata.DummyCommonAcne
 import com.b21cap0398.acnescan.utils.RequestCodes
+import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -35,12 +38,19 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // Firebase
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    private lateinit var viewModel: HomeViewModel
+
     private lateinit var classifier: Classifier.Classifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavigationDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        showLoading()
+
+        val factory = ViewModelFactory.getInstance()
+        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         setMainButtonOnClickListener()
         setEditProfileOnClickListener()
@@ -49,7 +59,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setMostCommonAcneAdapter()
         setDailyReadAdapter()
 
+        setNameProfile()
+
         initClassifier()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setNameProfile() {
+        viewModel.getUserInformation(auth.currentUser?.email!!).observe(this, {
+            val name = it.first_name
+            binding.tvProfileName.text = "Hello, " + name
+            hideLoading()
+        })
     }
 
     private fun initClassifier() {
@@ -152,14 +173,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.tv_edit_profile -> {
-                val intent = Intent(this, EditProfileActivity::class.java)
-                startActivity(intent)
-            }
-            else -> {
+        val intent = Intent(this, EditProfileActivity::class.java)
+        startActivity(intent)
+    }
 
-            }
-        }
+    private fun showLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.GONE
     }
 }

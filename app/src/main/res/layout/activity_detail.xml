@@ -84,7 +84,7 @@
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             app:cardCornerRadius="20dp"
-            android:elevation="2dp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="@id/v_divider"
             app:layout_constraintStart_toStartOf="@id/v_divider"
             app:layout_constraintTop_toBottomOf="@id/tv_highest_possibilites">
@@ -145,5 +145,16 @@
             app:layout_constraintEnd_toEndOf="@id/tv_highest_possibilites"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_other_possibilities" />
+
+        <include
+            android:id="@+id/inc_loading"
+            layout="@layout/layout_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

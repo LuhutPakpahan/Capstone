@@ -35,6 +35,9 @@ class AcceptedListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAcceptedListBinding.bind(view)
 
+        hideEmptyListWarning()
+        binding.progressBar.visibility = View.VISIBLE
+
         val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
@@ -53,6 +56,21 @@ class AcceptedListFragment : Fragment() {
                 })
                 this.adapter = adapter
             }
+
+            if (adapter.itemCount <= 0) {
+                showEmptyListWarning()
+            }
+            binding.progressBar.visibility = View.GONE
         })
+    }
+
+    private fun showEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.VISIBLE
+    }
+
+    private fun hideEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.GONE
     }
 }

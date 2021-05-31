@@ -5,13 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.b21cap0398.acnescan.data.source.firebase.FirebaseDataSource
 import com.b21cap0398.acnescan.data.source.local.entity.*
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class MainRepository(private val firebaseDataSource: FirebaseDataSource): MainDataSource{
+class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainDataSource {
 
     companion object {
         @Volatile
@@ -27,11 +25,14 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource): MainDa
         val result = MutableLiveData<AcneScanResult>()
         var test = "0"
         CoroutineScope(IO).launch {
-            firebaseDataSource.getAcneScanResult(email, result_id, object : FirebaseDataSource.LoadAcneScanResultCallback {
-                override fun onAcneScanResultReceived(acneScanResult: AcneScanResult) {
-                    Log.d("tag", acneScanResult.toString())
-                }
-            })
+            firebaseDataSource.getAcneScanResult(
+                email,
+                result_id,
+                object : FirebaseDataSource.LoadAcneScanResultCallback {
+                    override fun onAcneScanResultReceived(acneScanResult: AcneScanResult) {
+                        Log.d("tag", acneScanResult.toString())
+                    }
+                })
         }
         return result
     }
@@ -66,11 +67,36 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource): MainDa
     }
 
     override fun getUserInformation(email: String): LiveData<UserInformation> {
-        TODO("Not yet implemented")
+        val result = MutableLiveData<UserInformation>()
+        CoroutineScope(IO).launch {
+            firebaseDataSource.getUserInformation(email,
+                object : FirebaseDataSource.LoadUserInformationCallback {
+                    override fun onUserInformationReceived(userInformation: UserInformation) {
+                        result.postValue(userInformation)
+                    }
+
+                })
+        }
+
+        return result
     }
 
-    override fun setUserInformation(email: String) {
-        TODO("Not yet implemented")
+    override fun setUserInformation(
+        email: String,
+        firstName: String,
+        lastName: String,
+        age: Long,
+        gender: String
+    ) {
+        CoroutineScope(IO).launch {
+            firebaseDataSource.setUserInformation(
+                email = email,
+                firstName = firstName,
+                lastName = lastName,
+                age = age,
+                gender = gender
+            )
+        }
     }
 
     override fun getMostCommonAcnes(): LiveData<List<CommonAcne>> {

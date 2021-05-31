@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
@@ -32,17 +33,15 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showLoading()
+
         val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val intent = intent
         val result_id = intent.getStringExtra(RESULT_ID)
 
-        viewModel.getAcneScanResult(auth.currentUser?.email!!, result_id!!).observe(this, {
-
-        })
-
-        viewModel.getAllPossibilites(auth.currentUser?.email!!, result_id).observe( this, {
+        viewModel.getAllPossibilites(auth.currentUser?.email!!, result_id as String).observe( this, {
             var highestPossibility = Possibility("", 0)
             for (possibility in it) {
                 if (highestPossibility.possibility < possibility.possibility) {
@@ -68,6 +67,8 @@ class DetailActivity : AppCompatActivity() {
                     }
                 })
             }
+
+            hideLoading()
         })
 
         binding.civBackButton.setOnClickListener {
@@ -78,5 +79,15 @@ class DetailActivity : AppCompatActivity() {
             val intent = Intent(this, SpecificDetailActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun showLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.GONE
     }
 }

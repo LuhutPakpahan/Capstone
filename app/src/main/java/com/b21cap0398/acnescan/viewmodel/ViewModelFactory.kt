@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.b21cap0398.acnescan.data.source.MainRepository
 import com.b21cap0398.acnescan.di.Injection
 import com.b21cap0398.acnescan.ui.detail.DetailViewModel
+import com.b21cap0398.acnescan.ui.editprofile.EditProfileViewModel
+import com.b21cap0398.acnescan.ui.home.HomeViewModel
 import com.b21cap0398.acnescan.ui.result.ResultViewModel
+import com.b21cap0398.acnescan.ui.signup.SignupViewModel
 import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailViewModel
 
 class ViewModelFactory private constructor(private val mainRepository: MainRepository): ViewModelProvider.NewInstanceFactory() {
@@ -32,6 +35,18 @@ class ViewModelFactory private constructor(private val mainRepository: MainRepos
 
             modelClass.isAssignableFrom(ResultViewModel::class.java) -> {
                 ResultViewModel(mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
+                SignupViewModel(mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
+                EditProfileViewModel(mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(mainRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

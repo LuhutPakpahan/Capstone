@@ -5,23 +5,29 @@ import com.b21cap0398.acnescan.data.source.local.entity.*
 
 interface MainDataSource {
 
-    fun getAcneScanResult(email: String, result_id: String) : LiveData<AcneScanResult>
+    fun getAcneScanResult(email: String, result_id: String): LiveData<AcneScanResult>
 
-    fun getAllPossibilites(email: String, result_id: String) : LiveData<List<Possibility>>
+    fun getAllPossibilites(email: String, result_id: String): LiveData<List<Possibility>>
 
-    fun getAcneInformationById(acneId: String) : LiveData<AcneInformation>
+    fun getAcneInformationById(acneId: String): LiveData<AcneInformation>
 
-    fun getUserInformation(email: String) : LiveData<UserInformation>
+    fun getUserInformation(email: String): LiveData<UserInformation>
 
-    fun setUserInformation(email: String)
+    fun setUserInformation(
+        email: String,
+        firstName: String,
+        lastName: String,
+        age: Long,
+        gender: String
+    )
 
-    fun getMostCommonAcnes() : LiveData<List<CommonAcne>>
+    fun getMostCommonAcnes(): LiveData<List<CommonAcne>>
 
-    fun getDailyRead() : LiveData<List<Article>>
+    fun getDailyRead(): LiveData<List<Article>>
 
-    fun getAllAcceptedAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+    fun getAllAcceptedAcneScanResult(email: String): LiveData<List<AcneScanResult>>
 
-    fun getAllPendingAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+    fun getAllPendingAcneScanResult(email: String): LiveData<List<AcneScanResult>>
 
-    fun getAllRejectedAcneScanResult(email: String) : LiveData<List<AcneScanResult>>
+    fun getAllRejectedAcneScanResult(email: String): LiveData<List<AcneScanResult>>
 }

@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp
 
 data class AcneScanResult(
     val result_id: String?,
-    val imagePath: String?,
+    val image_path: String?,
     val date: String?,
     val status: String?
 )

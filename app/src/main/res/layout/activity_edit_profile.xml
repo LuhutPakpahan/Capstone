@@ -99,6 +99,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tf_gender"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -108,9 +109,10 @@
         app:layout_constraintTop_toBottomOf="@id/tf_first_name"
         app:layout_constraintStart_toStartOf="@id/tf_first_name" >
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -131,6 +133,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/civ_edit_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,6 +141,7 @@
         app:layout_constraintStart_toStartOf="@id/tf_age"
         android:layout_marginBottom="80dp"
         app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground">
 
@@ -154,6 +158,17 @@
             style="@style/Title.Button"
             android:gravity="center" />
     </androidx.cardview.widget.CardView>
+
+    <include
+        android:id="@+id/inc_loading"
+        layout="@layout/layout_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_center_vertical"

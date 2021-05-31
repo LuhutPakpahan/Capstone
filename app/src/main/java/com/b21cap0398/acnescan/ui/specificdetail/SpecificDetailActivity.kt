@@ -3,6 +3,7 @@ package com.b21cap0398.acnescan.ui.specificdetail
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +37,8 @@ class SpecificDetailActivity : AppCompatActivity() {
         binding = ActivitySpecificDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showLoading()
+
         val factory = ViewModelFactory.getInstance()
         val viewModel = ViewModelProvider(this, factory)[SpecificDetailViewModel::class.java]
 
@@ -53,6 +56,8 @@ class SpecificDetailActivity : AppCompatActivity() {
                 tvCauseOfAcne.text = it.causes
                 tvTipsToDeal.text = it.tips
             }
+
+            hideLoading()
         })
 
         setSpecificDetailAdapter()
@@ -78,5 +83,15 @@ class SpecificDetailActivity : AppCompatActivity() {
         binding.civBackButton.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun showLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        val loadingScreen = binding.incLoading.root
+        loadingScreen.visibility = View.GONE
     }
 }
