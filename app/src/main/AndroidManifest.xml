@@ -4,6 +4,9 @@
     package="com.b21cap0398.acnescan">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.camera.CameraActivity"></activity>
+
         <activity
             android:name=".ui.result.ResultActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar">

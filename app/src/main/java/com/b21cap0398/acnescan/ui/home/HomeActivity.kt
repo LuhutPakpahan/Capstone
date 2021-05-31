@@ -1,14 +1,18 @@
 package com.b21cap0398.acnescan.ui.home
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +66,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setNameProfile()
 
         initClassifier()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -85,8 +93,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (requestCode == RequestCodes.TAKE_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             val filepath = data.data!!
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
+        }
 
-            val result = classifier.recognizeImage(bitmap)
+        if (requestCode == 100) {
+            val captureImage = data?.extras?.get("data")!!
         }
     }
 
@@ -137,7 +147,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         binding.civTakeAPhoto.setOnClickListener {
-
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, 100)
         }
 
         binding.civUpload.setOnClickListener {

@@ -71,6 +71,12 @@ dependencies {
     // Also declare the dependency for the TensorFlow Lite library and specify its version
     implementation 'org.tensorflow:tensorflow-lite:2.4.0'
 
+// CameraX core library using camera2 implementation
+    implementation "androidx.camera:camera-camera2:1.0.0"
+// CameraX Lifecycle Library
+    implementation "androidx.camera:camera-lifecycle:1.0.0"
+// CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha24"
 
 
     testImplementation 'junit:junit:4.13.2'
