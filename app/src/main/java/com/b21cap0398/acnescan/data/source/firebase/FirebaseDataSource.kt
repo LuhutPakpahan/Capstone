@@ -1,12 +1,12 @@
 package com.b21cap0398.acnescan.data.source.firebase
 
+import android.graphics.Bitmap
 import android.util.Log
-import com.b21cap0398.acnescan.data.source.local.entity.AcneInformation
-import com.b21cap0398.acnescan.data.source.local.entity.AcneScanResult
-import com.b21cap0398.acnescan.data.source.local.entity.Possibility
-import com.b21cap0398.acnescan.data.source.local.entity.UserInformation
-import com.b21cap0398.acnescan.utils.helper.EndpointHelper
-import com.google.firebase.auth.UserInfo
+import com.b21cap0398.acnescan.data.source.local.entity.*
+import com.b21cap0398.acnescan.utils.helper.FirebaseStorageEndpointHelper
+import com.b21cap0398.acnescan.utils.helper.FirestoreEndpointHelper
+import com.b21cap0398.acnescan.utils.helper.ProgressBarOperator
+import java.io.ByteArrayOutputStream
 
 class FirebaseDataSource {
     companion object {
@@ -25,7 +25,7 @@ class FirebaseDataSource {
         callback: LoadAllPossibilitiesCallback
     ) {
 
-        val possibilities = EndpointHelper.getAllPossibilitesReference(email, result_id)
+        val possibilities = FirestoreEndpointHelper.getAllPossibilitesReference(email, result_id)
         possibilities.get().addOnSuccessListener { documents ->
             if (documents != null) {
                 Log.d("tag", documents.documents.size.toString())
@@ -46,7 +46,7 @@ class FirebaseDataSource {
 
     suspend fun getAcneScanResult(email: String, result_id: String, callback: LoadAcneScanResultCallback) {
 
-        val acneResultDocument = EndpointHelper.getAcneScanResultReference(email, result_id)
+        val acneResultDocument = FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
         Log.d("snapshot", acneResultDocument.get().toString())
 
         acneResultDocument.get().addOnSuccessListener { document ->
@@ -68,7 +68,7 @@ class FirebaseDataSource {
     @Suppress("UNCHECKED_CAST")
     suspend fun getAcneInformationById(acneId: String, callback: LoadAcneInformationCallback) {
 
-        val acneInformationResultDocument = EndpointHelper.getAcneInformationReference(acneId)
+        val acneInformationResultDocument = FirestoreEndpointHelper.getAcneInformationReference(acneId)
 
         acneInformationResultDocument.get().addOnSuccessListener { document ->
             if (document != null) {
@@ -83,9 +83,60 @@ class FirebaseDataSource {
         }
     }
 
+    suspend fun setResultPhoto(bitmap: Bitmap, email: String, result_id: String, callback: UploadPhotoCallback) {
+        val scanResultPhotoPath = FirebaseStorageEndpointHelper.getAcnePhotoPath(email, result_id)
+
+        ProgressBarOperator.setProgressBarValue(70)
+        ProgressBarOperator.setDescrtiptionTextView("Uploading a photo ...")
+
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        val uploadTask = scanResultPhotoPath.putBytes(data)
+
+        uploadTask
+            .addOnSuccessListener {
+                ProgressBarOperator.setProgressBarValue(100)
+                ProgressBarOperator.setDescrtiptionTextView("Photo has been uploaded successfully")
+                callback.onPhotoUploaded(it.metadata?.path.toString())
+            }
+            .addOnProgressListener {
+                val progress = (100 * it.bytesTransferred) / it.totalByteCount
+                ProgressBarOperator.setProgressBarValue(progress.toInt())
+            }
+    }
+
+    suspend fun setScanResultAndPossibilites(email: String, result_id: String, acneScanResult: AcneScanResult, possibilities: List<Possibility>) {
+        ProgressBarOperator.setDescrtiptionTextView("Preparing acne result to upload ...")
+        ProgressBarOperator.setProgressBarValue(0)
+        val acneResultDocument = FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
+        val acneScanResultToUpload = AcneScanResultToUpload(
+            image_path = acneScanResult.image_path,
+            date = acneScanResult.date,
+            status = acneScanResult.status)
+
+        acneResultDocument.set(acneScanResultToUpload).addOnSuccessListener {
+            ProgressBarOperator.setProgressBarValue(20)
+            ProgressBarOperator.setDescrtiptionTextView("Successfully to upload acne result ...")
+        }
+
+        val possibilitiesRef = FirestoreEndpointHelper.getAllPossibilitesReference(email, result_id)
+        ProgressBarOperator.setDescrtiptionTextView("Preparing possibilities to upload ...")
+        val progressIncrement = 30 / possibilities.size
+        for (possibility in possibilities) {
+            ProgressBarOperator.setProgressBarValue(ProgressBarOperator.getProgressBarValue() + progressIncrement)
+            ProgressBarOperator.setDescrtiptionTextView("Uploading possibility data ...")
+            possibilitiesRef.document().set(possibility)
+        }
+
+        ProgressBarOperator.setDescrtiptionTextView("Uploading is complete")
+        ProgressBarOperator.setProgressBarValue(600)
+    }
+
     suspend fun getAllAcceptedAcneScanResult(email: String, callback: LoadAllAcceptedAcneScanResultCallback) {
 
-        val listAcneInformation = EndpointHelper.getAllAcneScanResult(email)
+        val listAcneInformation = FirestoreEndpointHelper.getAllAcneScanResult(email)
 
         listAcneInformation.get().addOnSuccessListener { documents ->
             if (documents != null) {
@@ -109,7 +160,7 @@ class FirebaseDataSource {
 
     suspend fun getAllRejectedAcneScanResult(email: String, callback: LoadAllRejectedAcneScanResultCallback) {
 
-        val listAcneInformation = EndpointHelper.getAllAcneScanResult(email)
+        val listAcneInformation = FirestoreEndpointHelper.getAllAcneScanResult(email)
 
         listAcneInformation.get().addOnSuccessListener { documents ->
             if (documents != null) {
@@ -132,7 +183,7 @@ class FirebaseDataSource {
     }
 
     suspend fun setUserInformation(email: String, firstName: String, lastName: String, age: Long, gender: String) {
-        val registerEndpoint = EndpointHelper.getUserDocumentReference(email)
+        val registerEndpoint = FirestoreEndpointHelper.getUserDocumentReference(email)
 
         val userInformation = UserInformation(
             first_name = firstName,
@@ -147,7 +198,7 @@ class FirebaseDataSource {
     }
 
     suspend fun getUserInformation(email: String, callback: LoadUserInformationCallback) {
-        val userInformationDocument = EndpointHelper.getUserDocumentReference(email)
+        val userInformationDocument = FirestoreEndpointHelper.getUserDocumentReference(email)
 
         userInformationDocument.get().addOnSuccessListener { document ->
             if (document != null) {
@@ -180,10 +231,14 @@ class FirebaseDataSource {
     }
 
     interface LoadAllPossibilitiesCallback {
-        fun onAllPosibilitiesReceived(possibilities: List<Possibility>)
+        fun onAllPosibilitiesReceived(possibilities: ArrayList<Possibility>)
     }
 
     interface LoadUserInformationCallback {
         fun onUserInformationReceived(userInformation: UserInformation)
+    }
+
+    interface UploadPhotoCallback {
+        fun onPhotoUploaded(photoPath: String)
     }
 }

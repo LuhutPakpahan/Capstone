@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:layout_margin="8dp"
-    app:cardElevation="6dp"
-    app:cardCornerRadius="20dp"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless">
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +16,8 @@
 
         <ImageView
             android:id="@+id/iv_acne_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
             android:foreground="@drawable/ic_baseline_image_24"
             android:src="@drawable/acne_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,36 +27,42 @@
         <ImageView
             android:id="@+id/iv_acne_information"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_acne_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tv_name_of_acne"
+            android:id="@+id/tv_scan_result_num"
             style="@style/Title.ItemResultTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/name_of_acne"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@string/scan_result_s"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_acne_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
         <TextView
-            android:id="@+id/tv_desc_of_acne"
+            android:id="@+id/tv_date"
             style="@style/Subtitle.ArticleDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@string/short_paragraph_tempalte"
+            android:text="Date : 12-12-2021"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_name_of_acne"
-            app:layout_constraintTop_toBottomOf="@id/tv_name_of_acne" />
+            app:layout_constraintStart_toStartOf="@id/tv_scan_result_num"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

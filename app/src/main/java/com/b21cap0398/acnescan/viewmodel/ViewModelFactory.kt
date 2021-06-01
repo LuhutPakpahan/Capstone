@@ -10,6 +10,7 @@ import com.b21cap0398.acnescan.ui.home.HomeViewModel
 import com.b21cap0398.acnescan.ui.result.ResultViewModel
 import com.b21cap0398.acnescan.ui.signup.SignupViewModel
 import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailViewModel
+import com.b21cap0398.acnescan.ui.uploaddata.UploadDataViewModel
 
 class ViewModelFactory private constructor(private val mainRepository: MainRepository): ViewModelProvider.NewInstanceFactory() {
     companion object {
@@ -47,6 +48,10 @@ class ViewModelFactory private constructor(private val mainRepository: MainRepos
 
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(UploadDataViewModel::class.java) -> {
+                UploadDataViewModel(mainRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

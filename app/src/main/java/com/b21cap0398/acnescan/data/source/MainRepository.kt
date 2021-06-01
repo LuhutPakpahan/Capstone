@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.data.source
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,12 +38,12 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainD
         return result
     }
 
-    override fun getAllPossibilites(email: String, result_id: String): LiveData<List<Possibility>> {
-        val result = MutableLiveData<List<Possibility>>()
+    override fun getAllPossibilites(email: String, result_id: String): LiveData<ArrayList<Possibility>> {
+        val result = MutableLiveData<ArrayList<Possibility>>()
         CoroutineScope(IO).launch {
             firebaseDataSource.getAllPossibilities(email, result_id,
                 object : FirebaseDataSource.LoadAllPossibilitiesCallback {
-                    override fun onAllPosibilitiesReceived(possibilities: List<Possibility>) {
+                    override fun onAllPosibilitiesReceived(possibilities: ArrayList<Possibility>) {
                         result.postValue(possibilities)
                     }
 
@@ -128,5 +129,30 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainD
 
     override fun getAllRejectedAcneScanResult(email: String): LiveData<List<AcneScanResult>> {
         TODO("Not yet implemented")
+    }
+
+    override fun setResultPhoto(bitmap: Bitmap, email: String, result_id: String): LiveData<String> {
+        val result = MutableLiveData<String>()
+        CoroutineScope(IO).launch {
+            firebaseDataSource.setResultPhoto(bitmap, email, result_id,
+                object : FirebaseDataSource.UploadPhotoCallback {
+                    override fun onPhotoUploaded(photoPath: String) {
+                        result.postValue(photoPath)
+                    }
+                })
+        }
+
+        return result
+    }
+
+    override fun setScanResultAndPossibilites(
+        email: String,
+        result_id: String,
+        acneScanResult: AcneScanResult,
+        possibilities: List<Possibility>
+    ) {
+        CoroutineScope(IO).launch {
+            firebaseDataSource.setScanResultAndPossibilites(email, result_id, acneScanResult, possibilities)
+        }
     }
 }

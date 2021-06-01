@@ -91,5 +91,6 @@
     <string name="edit">Edit</string>
     <string name="last_name_should_be_filled">Last name should be filled</string>
     <string name="possibility">Possibility:</string>
+    <string name="scan_result_s">Scan Result %s</string>
 
 </resources>

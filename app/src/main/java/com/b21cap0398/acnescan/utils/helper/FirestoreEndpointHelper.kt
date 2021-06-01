@@ -6,7 +6,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
-object EndpointHelper {
+object FirestoreEndpointHelper {
 
     val db = FirebaseFirestore.getInstance()
 

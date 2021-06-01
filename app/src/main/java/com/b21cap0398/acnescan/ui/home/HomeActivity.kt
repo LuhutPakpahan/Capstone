@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
@@ -22,6 +23,7 @@ import com.b21cap0398.acnescan.tflife.Classifier
 import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
 import com.b21cap0398.acnescan.ui.login.LoginActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
+import com.b21cap0398.acnescan.ui.uploaddata.UploadDataActivity
 import com.b21cap0398.acnescan.utils.dummydata.DummyArticle
 import com.b21cap0398.acnescan.utils.dummydata.DummyCommonAcne
 import com.b21cap0398.acnescan.utils.RequestCodes
@@ -92,11 +94,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RequestCodes.TAKE_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             val filepath = data.data!!
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath) as Bitmap
+
+            UploadDataActivity.bitmap = bitmap
+            startActivity(Intent(this, UploadDataActivity::class.java))
         }
 
         if (requestCode == 100) {
-            val captureImage = data?.extras?.get("data")!!
+            val captureImage = data?.extras?.get("data") as Bitmap
+
+            UploadDataActivity.bitmap = captureImage
+            startActivity(Intent(this, UploadDataActivity::class.java))
         }
     }
 

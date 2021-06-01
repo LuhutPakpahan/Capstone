@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.data.source
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import com.b21cap0398.acnescan.data.source.local.entity.*
 
@@ -7,7 +8,7 @@ interface MainDataSource {
 
     fun getAcneScanResult(email: String, result_id: String): LiveData<AcneScanResult>
 
-    fun getAllPossibilites(email: String, result_id: String): LiveData<List<Possibility>>
+    fun getAllPossibilites(email: String, result_id: String): LiveData<ArrayList<Possibility>>
 
     fun getAcneInformationById(acneId: String): LiveData<AcneInformation>
 
@@ -30,4 +31,8 @@ interface MainDataSource {
     fun getAllPendingAcneScanResult(email: String): LiveData<List<AcneScanResult>>
 
     fun getAllRejectedAcneScanResult(email: String): LiveData<List<AcneScanResult>>
+
+    fun setResultPhoto(bitmap: Bitmap, email: String, result_id: String): LiveData<String>
+
+    fun setScanResultAndPossibilites(email: String, result_id: String, acneScanResult: AcneScanResult, possibilities: List<Possibility>)
 }
