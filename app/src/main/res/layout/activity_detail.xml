@@ -93,6 +93,8 @@
                 android:id="@+id/iv_highest_possibility"
                 android:layout_width="325dp"
                 android:layout_height="200dp"
+                android:background="@color/black"
+                android:scaleType="fitCenter"
                 android:src="@drawable/gradient"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 tools:ignore="ContentDescription" />

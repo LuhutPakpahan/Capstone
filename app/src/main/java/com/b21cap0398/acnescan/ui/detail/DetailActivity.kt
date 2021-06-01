@@ -11,12 +11,16 @@ import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.data.source.local.entity.Possibility
 import com.b21cap0398.acnescan.databinding.ActivityDetailBinding
 import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailActivity
+import com.b21cap0398.acnescan.utils.helper.FirebaseStorageEndpointHelper
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.auth.FirebaseAuth
 
 class DetailActivity : AppCompatActivity() {
 
     companion object {
+        const val ACNE_IMAGE_PATH = "acne_image_path"
         const val RESULT_ID = "result_id"
     }
 
@@ -45,6 +49,22 @@ class DetailActivity : AppCompatActivity() {
                 arraySortedPossibilities.addAll(sortedPossibilities)
                 val highestPossibility = sortedPossibilities[0]
                 val highestPossibilityNumber = highestPossibility.possibility.toString()
+
+                binding.tvAcneName.text = highestPossibility.acne_name
+
+                viewModel.getAcneInformationById(highestPossibility.acne_name).observe(this, {
+                    binding.tvAcneDescription.text = it.description
+                })
+
+                binding.ivHighestPossibility.setOnClickListener {
+                    val intent = Intent(this, SpecificDetailActivity::class.java)
+                    intent.putExtra(SpecificDetailActivity.ACNE_NAME, highestPossibility.acne_name)
+                    intent.putExtra(
+                        SpecificDetailActivity.ACNE_POSSIBILITY,
+                        highestPossibility.possibility
+                    )
+                    startActivity(intent)
+                }
 
                 binding.tvHighestPossibilites.text =
                     getString(R.string.the_highest_possibilites_s) + " " + highestPossibilityNumber + "%"
@@ -77,13 +97,17 @@ class DetailActivity : AppCompatActivity() {
                 hideLoading()
             })
 
-        binding.civBackButton.setOnClickListener {
-            onBackPressed()
+        val uri = intent.getStringExtra(ACNE_IMAGE_PATH)
+
+        FirebaseStorageEndpointHelper.getDownloadUrlOfReference(uri!!).addOnSuccessListener {
+            Glide.with(this)
+                .load(it)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.ivHighestPossibility)
         }
 
-        binding.ivHighestPossibility.setOnClickListener {
-            val intent = Intent(this, SpecificDetailActivity::class.java)
-            startActivity(intent)
+        binding.civBackButton.setOnClickListener {
+            onBackPressed()
         }
     }
 

@@ -18,8 +18,8 @@
             android:id="@+id/iv_acne_image"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:foreground="@drawable/ic_baseline_image_24"
             android:src="@drawable/acne_image"
+            android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />

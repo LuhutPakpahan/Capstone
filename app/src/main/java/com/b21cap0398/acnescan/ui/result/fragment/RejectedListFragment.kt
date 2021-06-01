@@ -32,7 +32,6 @@ class RejectedListFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
 
         val adapter = RejectedListAdapter()
-        adapter.setList(DummyResultAcne.addDummyResultAcne())
         binding.rvRejectedList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

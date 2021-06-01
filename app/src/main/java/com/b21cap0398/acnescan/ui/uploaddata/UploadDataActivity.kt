@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.uploaddata
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,12 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.b21cap0398.acnescan.data.source.local.entity.AcneScanResult
 import com.b21cap0398.acnescan.data.source.local.entity.Possibility
 import com.b21cap0398.acnescan.databinding.ActivityUploadDataBinding
-import com.b21cap0398.acnescan.ui.detail.DetailActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
 import com.b21cap0398.acnescan.utils.helper.ProgressBarOperator
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
-import java.io.ByteArrayOutputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -48,16 +47,17 @@ class UploadDataActivity : AppCompatActivity() {
         // Predicting the acne
         // Acnes result down here ....
         val possibilities = listOf<Possibility>(
-            Possibility(acne_name = "nodules", possibility = 80),
-            Possibility(acne_name = "nodules", possibility = 70),
-            Possibility(acne_name = "nodules", possibility = 60),
+            Possibility(acne_name = "Nodules", possibility = 80),
+            Possibility(acne_name = "Nodules", possibility = 70),
+            Possibility(acne_name = "Nodules", possibility = 60),
         )
 
         val acneScanResult = AcneScanResult(
             result_id = randomString,
             image_path = "users/${auth.currentUser?.email!!}/results/${randomString}/${randomString}.jpg",
             date = date.toString(),
-            status = "accepted")
+            status = "accepted"
+        )
 
 
         ProgressBarOperator.setProgressBarValue(0)
@@ -67,10 +67,15 @@ class UploadDataActivity : AppCompatActivity() {
             finish()
         })
 
-        viewModel.setScanResultAndPossibilites(auth.currentUser?.email!!, randomString, acneScanResult, possibilities)
+        viewModel.setScanResultAndPossibilites(
+            auth.currentUser?.email!!,
+            randomString,
+            acneScanResult,
+            possibilities
+        )
     }
 
-    fun getRandomString(length: Int) : String {
+    fun getRandomString(length: Int): String {
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..length)
             .map { allowedChars.random() }

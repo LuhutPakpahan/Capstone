@@ -1,15 +1,16 @@
 package com.b21cap0398.acnescan.ui.specificdetail
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.b21cap0398.acnescan.R
+import com.b21cap0398.acnescan.data.source.local.entity.MedicineInformation
 import com.b21cap0398.acnescan.databinding.ActivitySpecificDetailBinding
-import com.b21cap0398.acnescan.utils.dummydata.DummyAcnePictures
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
@@ -24,7 +25,8 @@ class SpecificDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySpecificDetailBinding
 
     // Adapter
-    private lateinit var adapter: SpecificDetailAdapter
+    private lateinit var acneImagesAdapter: AcneImagesAdapter
+    private lateinit var recommendedMedicineAdapter: RecomendedMedicineAdapter
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -55,27 +57,52 @@ class SpecificDetailActivity : AppCompatActivity() {
                 tvAcneDescription.text = it.description
                 tvCauseOfAcne.text = it.causes
                 tvTipsToDeal.text = it.tips
+                setAcneImagesAdapter(it.listImagePaths)
             }
 
             hideLoading()
         })
 
-        setSpecificDetailAdapter()
-
+        setRecommendedMedicines(listOf(
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", ""),
+            MedicineInformation("", "", "")
+        ))
         setBackButtonOnClickListener()
     }
 
-    private fun setSpecificDetailAdapter() {
-        adapter = SpecificDetailAdapter()
-        adapter.setListPhoto(DummyAcnePictures.addDummyAcnePictures())
-        binding.rvOtherAcneImage.apply {
+    private fun setRecommendedMedicines(list: List<MedicineInformation>) {
+        recommendedMedicineAdapter = RecomendedMedicineAdapter()
+        recommendedMedicineAdapter.setList(list)
+        binding.rvRecomendedMedicine.apply {
             layoutManager = LinearLayoutManager(
                 this@SpecificDetailActivity,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
             setHasFixedSize(true)
-            this.adapter = adapter
+            adapter = recommendedMedicineAdapter
+        }
+    }
+
+    private fun setAcneImagesAdapter(list: List<String>) {
+        acneImagesAdapter = AcneImagesAdapter()
+        acneImagesAdapter.setList(list)
+        binding.rvAcneImages.apply {
+            layoutManager = LinearLayoutManager(
+                this@SpecificDetailActivity,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            setHasFixedSize(true)
+            adapter = acneImagesAdapter
+
+            val snapHelper: SnapHelper = LinearSnapHelper()
+            snapHelper.attachToRecyclerView(binding.rvAcneImages)
         }
     }
 

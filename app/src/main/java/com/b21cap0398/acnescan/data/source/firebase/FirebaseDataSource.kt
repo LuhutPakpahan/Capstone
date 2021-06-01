@@ -44,9 +44,14 @@ class FirebaseDataSource {
         }
     }
 
-    suspend fun getAcneScanResult(email: String, result_id: String, callback: LoadAcneScanResultCallback) {
+    suspend fun getAcneScanResult(
+        email: String,
+        result_id: String,
+        callback: LoadAcneScanResultCallback
+    ) {
 
-        val acneResultDocument = FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
+        val acneResultDocument =
+            FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
         Log.d("snapshot", acneResultDocument.get().toString())
 
         acneResultDocument.get().addOnSuccessListener { document ->
@@ -68,7 +73,8 @@ class FirebaseDataSource {
     @Suppress("UNCHECKED_CAST")
     suspend fun getAcneInformationById(acneId: String, callback: LoadAcneInformationCallback) {
 
-        val acneInformationResultDocument = FirestoreEndpointHelper.getAcneInformationReference(acneId)
+        val acneInformationResultDocument =
+            FirestoreEndpointHelper.getAcneInformationReference(acneId)
 
         acneInformationResultDocument.get().addOnSuccessListener { document ->
             if (document != null) {
@@ -76,14 +82,20 @@ class FirebaseDataSource {
                     listImagePaths = document["acne_images"] as List<String>,
                     causes = document["causes"] as String,
                     description = document["description"] as String,
-                    tips = document["tips"] as String)
+                    tips = document["tips"] as String
+                )
 
                 callback.onAcneInformationReceived(result)
             }
         }
     }
 
-    suspend fun setResultPhoto(bitmap: Bitmap, email: String, result_id: String, callback: UploadPhotoCallback) {
+    suspend fun setResultPhoto(
+        bitmap: Bitmap,
+        email: String,
+        result_id: String,
+        callback: UploadPhotoCallback
+    ) {
         val scanResultPhotoPath = FirebaseStorageEndpointHelper.getAcnePhotoPath(email, result_id)
 
         ProgressBarOperator.setProgressBarValue(70)
@@ -107,14 +119,21 @@ class FirebaseDataSource {
             }
     }
 
-    suspend fun setScanResultAndPossibilites(email: String, result_id: String, acneScanResult: AcneScanResult, possibilities: List<Possibility>) {
+    suspend fun setScanResultAndPossibilites(
+        email: String,
+        result_id: String,
+        acneScanResult: AcneScanResult,
+        possibilities: List<Possibility>
+    ) {
         ProgressBarOperator.setDescrtiptionTextView("Preparing acne result to upload ...")
         ProgressBarOperator.setProgressBarValue(0)
-        val acneResultDocument = FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
+        val acneResultDocument =
+            FirestoreEndpointHelper.getAcneScanResultReference(email, result_id)
         val acneScanResultToUpload = AcneScanResultToUpload(
             image_path = acneScanResult.image_path,
             date = acneScanResult.date,
-            status = acneScanResult.status)
+            status = acneScanResult.status
+        )
 
         acneResultDocument.set(acneScanResultToUpload).addOnSuccessListener {
             ProgressBarOperator.setProgressBarValue(20)
@@ -134,7 +153,10 @@ class FirebaseDataSource {
         ProgressBarOperator.setProgressBarValue(600)
     }
 
-    suspend fun getAllAcceptedAcneScanResult(email: String, callback: LoadAllAcceptedAcneScanResultCallback) {
+    suspend fun getAllAcceptedAcneScanResult(
+        email: String,
+        callback: LoadAllAcceptedAcneScanResultCallback
+    ) {
 
         val listAcneInformation = FirestoreEndpointHelper.getAllAcneScanResult(email)
 
@@ -149,7 +171,8 @@ class FirebaseDataSource {
                                 result_id = document.id,
                                 image_path = document["image_path"] as String,
                                 date = document["date"] as String,
-                                status = document["status"] as String)
+                                status = document["status"] as String
+                            )
                         )
                     }
                 }
@@ -158,7 +181,10 @@ class FirebaseDataSource {
         }
     }
 
-    suspend fun getAllRejectedAcneScanResult(email: String, callback: LoadAllRejectedAcneScanResultCallback) {
+    suspend fun getAllRejectedAcneScanResult(
+        email: String,
+        callback: LoadAllRejectedAcneScanResultCallback
+    ) {
 
         val listAcneInformation = FirestoreEndpointHelper.getAllAcneScanResult(email)
 
@@ -173,7 +199,8 @@ class FirebaseDataSource {
                                 result_id = document.id,
                                 image_path = document["image_path"] as String,
                                 date = document["date"] as String,
-                                status = document["status"] as String)
+                                status = document["status"] as String
+                            )
                         )
                     }
                 }
@@ -182,7 +209,13 @@ class FirebaseDataSource {
         }
     }
 
-    suspend fun setUserInformation(email: String, firstName: String, lastName: String, age: Long, gender: String) {
+    suspend fun setUserInformation(
+        email: String,
+        firstName: String,
+        lastName: String,
+        age: Long,
+        gender: String
+    ) {
         val registerEndpoint = FirestoreEndpointHelper.getUserDocumentReference(email)
 
         val userInformation = UserInformation(
@@ -203,10 +236,10 @@ class FirebaseDataSource {
         userInformationDocument.get().addOnSuccessListener { document ->
             if (document != null) {
                 val userInformation = UserInformation(
-                    first_name = document["first_name"] as String,
-                    last_name = document["last_name"] as String,
-                    age = document["age"] as Long,
-                    gender = document["gender"] as String
+                    first_name = document["first_name"] as String?,
+                    last_name = document["last_name"] as String?,
+                    age = document["age"] as Long?,
+                    gender = document["gender"] as String?
                 )
 
                 callback.onUserInformationReceived(userInformation)

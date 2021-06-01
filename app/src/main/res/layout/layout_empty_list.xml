@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="You have no accepted result"
+        android:text="You don't have any result yet"
         android:textColor="#7CB3CC"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

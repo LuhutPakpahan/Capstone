@@ -24,9 +24,9 @@ import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
 import com.b21cap0398.acnescan.ui.login.LoginActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
 import com.b21cap0398.acnescan.ui.uploaddata.UploadDataActivity
+import com.b21cap0398.acnescan.utils.RequestCodes
 import com.b21cap0398.acnescan.utils.dummydata.DummyArticle
 import com.b21cap0398.acnescan.utils.dummydata.DummyCommonAcne
-import com.b21cap0398.acnescan.utils.RequestCodes
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -69,7 +69,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         initClassifier()
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
         }
     }
@@ -84,7 +88,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initClassifier() {
-        val mInputSize : Int = 180
+        val mInputSize: Int = 180
         val mLabelPath = "custom_labels.txt"
         val mModelPath = "acnescan_V5.tflite"
         classifier = Classifier.Classifier(assets, mModelPath, mLabelPath, mInputSize)

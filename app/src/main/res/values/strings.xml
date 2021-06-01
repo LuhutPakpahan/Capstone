@@ -92,5 +92,8 @@
     <string name="last_name_should_be_filled">Last name should be filled</string>
     <string name="possibility">Possibility:</string>
     <string name="scan_result_s">Scan Result %s</string>
+    <string name="name_of_medicice">Name of medicice</string>
+    <string name="price_s">Price: %s</string>
+    <string name="recommended_medicine">Recommended Medicine</string>
 
 </resources>

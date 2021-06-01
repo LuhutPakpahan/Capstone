@@ -1,16 +1,14 @@
 package com.b21cap0398.acnescan.ui.detail
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.b21cap0398.acnescan.R
-import com.b21cap0398.acnescan.data.source.local.entity.OtherPossibility
 import com.b21cap0398.acnescan.data.source.local.entity.Possibility
 import com.b21cap0398.acnescan.databinding.ItemOtherAcnePossibilityBinding
 
-class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter.CustomViewHolder>() {
+class OtherPossibilitiesAdapter() :
+    RecyclerView.Adapter<OtherPossibilitiesAdapter.CustomViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -25,7 +23,8 @@ class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class CustomViewHolder(val binding: ItemOtherAcnePossibilityBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CustomViewHolder(val binding: ItemOtherAcnePossibilityBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: Possibility) {
             binding.tvNameOfAcne.text = data.acne_name
@@ -38,7 +37,13 @@ class OtherPossibilitiesAdapter : RecyclerView.Adapter<OtherPossibilitiesAdapter
         parent: ViewGroup,
         viewType: Int
     ): OtherPossibilitiesAdapter.CustomViewHolder {
-        return CustomViewHolder(ItemOtherAcnePossibilityBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return CustomViewHolder(
+            ItemOtherAcnePossibilityBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(
