@@ -87,7 +87,10 @@ class FirebaseDataSource {
                     listImagePaths = (document["acne_images"] ?: listOf("w")) as List<String> ,
                     causes = (document["causes"] ?: "test") as String,
                     description = (document["description"] ?: "test") as String,
-                    tips = (document["tips"] ?: "test") as String
+                    tips = (document["tips"] ?: "test") as String,
+                    product_names = (document["product_names"] ?: listOf("w")) as List<String>,
+                    product_images = (document["product_images"] ?: listOf("w")) as List<String>,
+                    product_prices = (document["product_prices"] ?: listOf("w")) as List<String>
                 )
 
                 callback.onAcneInformationReceived(result)

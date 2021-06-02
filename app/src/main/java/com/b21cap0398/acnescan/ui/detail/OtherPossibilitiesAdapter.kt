@@ -28,7 +28,7 @@ class OtherPossibilitiesAdapter() :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: Possibility) {
-            binding.tvNameOfAcne.text = data.acne_name
+            binding.tvNameOfAcne.text = data.acne_name[0].toUpperCase() + data.acne_name.substring(1)
             binding.tvPercentageOfAcne.text = "Possibility: ${DecimalFormat("##.#").format(data.possibility)} %"
         }
     }

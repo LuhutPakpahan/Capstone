@@ -50,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
                 arraySortedPossibilities.addAll(sortedPossibilities)
                 val highestPossibility = sortedPossibilities[0]
 
-                binding.tvAcneName.text = highestPossibility.acne_name
+                binding.tvAcneName.text = highestPossibility.acne_name[0].toUpperCase() + highestPossibility.acne_name.substring(1)
 
                 viewModel.getAcneInformationById(highestPossibility.acne_name).observe(this, {
                     binding.tvAcneDescription.text = it.description

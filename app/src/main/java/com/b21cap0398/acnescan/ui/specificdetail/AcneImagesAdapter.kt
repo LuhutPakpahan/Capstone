@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.b21cap0398.acnescan.databinding.ItemAcnePhotoBinding
+import com.b21cap0398.acnescan.utils.helper.FirebaseStorageEndpointHelper
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class AcneImagesAdapter() :
     RecyclerView.Adapter<AcneImagesAdapter.CustomViewHolder>() {
@@ -26,7 +29,12 @@ class AcneImagesAdapter() :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: String) {
-
+            FirebaseStorageEndpointHelper.getDownloadUrlOfReference(data).addOnSuccessListener {
+                Glide.with(itemView.context)
+                    .load(it)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.ivSelectedAcne)
+            }
         }
     }
 
@@ -47,7 +55,7 @@ class AcneImagesAdapter() :
         holder: AcneImagesAdapter.CustomViewHolder,
         position: Int
     ) {
-
+        holder.bind(imagePaths[position])
     }
 
     override fun getItemCount(): Int {

@@ -55,7 +55,7 @@ class SpecificDetailActivity : AppCompatActivity() {
         val possibilityNum = intent.getDoubleExtra(ACNE_POSSIBILITY, 0.0)
         acnePossibility = DecimalFormat("##.#").format(possibilityNum)
 
-        binding.tvAcneName.text = acneName
+        binding.tvAcneName.text = acneName[0].toUpperCase() + acneName.substring(1)
         binding.tvAcneNumberPossibility.text =
             getString(R.string.your_acne_is_similar_to_this_type_of_acne_about) + " " + acnePossibility + "%"
 
@@ -65,22 +65,23 @@ class SpecificDetailActivity : AppCompatActivity() {
                 tvCauseOfAcne.text = it.causes
                 tvTipsToDeal.text = it.tips
                 setAcneImagesAdapter(it.listImagePaths!!)
+
+                val listProduct = arrayListOf<MedicineInformation>()
+
+                for (i in 0 until (it.product_images!!.count() - 1)) {
+                    val medicineInfo = MedicineInformation(
+                        image_path = it.product_images[i],
+                        name = it.product_names?.get(i) as String,
+                        price = it.product_prices?.get(i) as String
+                    )
+                    listProduct.add(medicineInfo)
+                }
+
+                setRecommendedMedicines(listProduct)
             }
 
             hideLoading()
         })
-
-        setRecommendedMedicines(
-            listOf(
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", "")
-            )
-        )
 
         setFeedbackButtonOnClickListener()
         setBackButtonOnClickListener()

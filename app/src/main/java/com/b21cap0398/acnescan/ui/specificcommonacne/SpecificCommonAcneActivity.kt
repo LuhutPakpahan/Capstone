@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.specificcommonacne
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.data.source.local.entity.MedicineInformation
 import com.b21cap0398.acnescan.databinding.ActivitySpecificCommonAcneBinding
 import com.b21cap0398.acnescan.ui.specificdetail.AcneImagesAdapter
 import com.b21cap0398.acnescan.ui.specificdetail.RecomendedMedicineAdapter
+import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailActivity
+import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailViewModel
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
+import java.text.DecimalFormat
 
 class SpecificCommonAcneActivity : AppCompatActivity() {
 
@@ -27,6 +32,7 @@ class SpecificCommonAcneActivity : AppCompatActivity() {
     private lateinit var acneImagesAdapter: AcneImagesAdapter
     private lateinit var recommendedMedicineAdapter: RecomendedMedicineAdapter
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySpecificCommonAcneBinding.inflate(layoutInflater)
@@ -38,9 +44,11 @@ class SpecificCommonAcneActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, factory)[SpecificCommonAcneViewModel::class.java]
 
         val intent = intent
-        acneName = intent.getStringExtra(ACNE_NAME).toString()
+        acneName = intent.getStringExtra(SpecificDetailActivity.ACNE_NAME).toString()
+        val possibilityNum = intent.getDoubleExtra(SpecificDetailActivity.ACNE_POSSIBILITY, 0.0)
+        acnePossibility = DecimalFormat("##.#").format(possibilityNum)
 
-        binding.tvAcneName.text = acneName
+        binding.tvAcneName.text = acneName[0].toUpperCase() + acneName.substring(1)
 
         viewModel.getAcneInformationById(acneName).observe(this, {
             binding.apply {
@@ -48,22 +56,23 @@ class SpecificCommonAcneActivity : AppCompatActivity() {
                 tvCauseOfAcne.text = it.causes
                 tvTipsToDeal.text = it.tips
                 setAcneImagesAdapter(it.listImagePaths!!)
+
+                val listProduct = arrayListOf<MedicineInformation>()
+
+                for (i in 0 until (it.product_images!!.count() - 1)) {
+                    val medicineInfo = MedicineInformation(
+                        image_path = it.product_images[i],
+                        name = it.product_names?.get(i) as String,
+                        price = it.product_prices?.get(i) as String
+                    )
+                    listProduct.add(medicineInfo)
+                }
+
+                setRecommendedMedicines(listProduct)
             }
 
             hideLoading()
         })
-
-        setRecommendedMedicines(
-            listOf(
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", ""),
-                MedicineInformation("", "", "")
-            )
-        )
 
         setBackButtonOnClickListener()
     }

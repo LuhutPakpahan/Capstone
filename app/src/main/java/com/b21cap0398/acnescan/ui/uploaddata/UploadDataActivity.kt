@@ -1,10 +1,8 @@
 package com.b21cap0398.acnescan.ui.uploaddata
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.b21cap0398.acnescan.data.source.local.entity.AcneScanResult
@@ -16,11 +14,8 @@ import com.b21cap0398.acnescan.utils.helper.ProgressBarOperator
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import org.tensorflow.lite.support.image.TensorImage
-import java.io.File
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class UploadDataActivity : AppCompatActivity() {
 

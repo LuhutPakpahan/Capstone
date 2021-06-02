@@ -15,10 +15,11 @@
         app:cardCornerRadius="8dp">
 
         <ImageView
+            android:padding="8dp"
             android:id="@+id/iv_acne"
+            android:scaleType="centerCrop"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_baseline_image_24"
             android:background="@drawable/gradient"
             tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
