@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -77,51 +77,83 @@
             app:layout_constraintTop_toBottomOf="@id/v_divider" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/civ_highest_possibility"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="@id/v_divider"
-            app:layout_constraintStart_toStartOf="@id/v_divider"
-            app:layout_constraintTop_toBottomOf="@id/tv_highest_possibilites">
-
-            <ImageView
-                android:id="@+id/iv_highest_possibility"
-                android:layout_width="325dp"
-                android:layout_height="200dp"
-                android:background="@color/black"
-                android:scaleType="fitCenter"
-                android:src="@drawable/gradient"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                tools:ignore="ContentDescription" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tv_acne_name"
-            style="@style/Title.HighestPossibilityAcneTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/acne_name"
-            app:layout_constraintStart_toStartOf="@id/tv_highest_possibilites"
-            app:layout_constraintTop_toBottomOf="@id/civ_highest_possibility" />
-
-        <TextView
-            android:id="@+id/tv_acne_description"
-            style="@style/Content.DescriptionPossibilityAcne"
+            android:id="@+id/cv_highest_possibility"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/short_paragraph_tempalte"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="@id/tv_highest_possibilites"
-            app:layout_constraintStart_toStartOf="@id/tv_highest_possibilites"
-            app:layout_constraintTop_toBottomOf="@id/tv_acne_name" />
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_highest_possibilites">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/gradient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/civ_highest_possibility"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_highest_possibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@drawable/gradient"
+                        android:scaleType="centerCrop"
+                        tools:ignore="ContentDescription" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_acne_name"
+                    style="@style/Title.HighestPossibilityAcneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/acne_name"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/civ_highest_possibility"
+                    app:layout_constraintTop_toBottomOf="@id/civ_highest_possibility" />
+
+                <TextView
+                    android:id="@+id/tv_acne_description"
+                    style="@style/Content.DescriptionPossibilityAcne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/short_paragraph_tempalte"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_acne_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_acne_name" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/tv_other_possibilities"
@@ -133,20 +165,20 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_acne_description" />
+            app:layout_constraintTop_toBottomOf="@id/cv_highest_possibility" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_other_acne_possibility"
-            tools:listitem="@layout/item_other_acne_possibility"
             android:layout_width="0dp"
             android:layout_height="120dp"
-            app:layout_constraintVertical_bias="0.2"
-            android:layout_marginStart="24dp"
             android:layout_marginVertical="12dp"
+            android:layout_marginStart="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_highest_possibilites"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_other_possibilities" />
+            app:layout_constraintTop_toBottomOf="@id/tv_other_possibilities"
+            app:layout_constraintVertical_bias="0.2"
+            tools:listitem="@layout/item_other_acne_possibility" />
 
         <include
             android:id="@+id/inc_loading"

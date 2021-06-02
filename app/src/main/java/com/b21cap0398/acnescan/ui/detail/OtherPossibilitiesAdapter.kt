@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.b21cap0398.acnescan.data.source.local.entity.Possibility
 import com.b21cap0398.acnescan.databinding.ItemOtherAcnePossibilityBinding
+import java.text.DecimalFormat
 
 class OtherPossibilitiesAdapter() :
     RecyclerView.Adapter<OtherPossibilitiesAdapter.CustomViewHolder>() {
@@ -28,8 +29,7 @@ class OtherPossibilitiesAdapter() :
         @SuppressLint("SetTextI18n")
         fun bind(data: Possibility) {
             binding.tvNameOfAcne.text = data.acne_name
-            val possibilityNumber = data.possibility.toString()
-            binding.tvPercentageOfAcne.text = "Possibility: $possibilityNumber %"
+            binding.tvPercentageOfAcne.text = "Possibility: ${DecimalFormat("##.#").format(data.possibility)} %"
         }
     }
 

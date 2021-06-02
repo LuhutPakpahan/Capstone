@@ -95,5 +95,12 @@
     <string name="name_of_medicice">Name of medicice</string>
     <string name="price_s">Price: %s</string>
     <string name="recommended_medicine">Recommended Medicine</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="we_hope_you_enjoy_a_good_experience_after_using_the_acne_scan_application_for_criticism_and_suggestions_please_write_below">We hope you enjoy a good experience after using the acne scan application. For criticism and suggestions, please write below!</string>
+    <string name="are_the_results_of_acne_detection_correct">Are the results of acne detection correct ?</string>
+    <string name="are_the_tips_and_tricks_for_the_treatment_of_acne_clear_and_user_enough">Are the tips and tricks for the treatment of acne clear and user enough</string>
+    <string name="suggestions_and_critics">Suggestions and critics :</string>
+    <string name="feedback_has_been_sent">Feedback has been sent!</string>
+    <string name="thank_you_for_your_availability_to_fill_in_the_feedback_your_feedback_is_meaningful_in_our_future_development">Thank you for your availability to fill in the feedback. Your feedback is meaningful in our future development</string>
 
 </resources>

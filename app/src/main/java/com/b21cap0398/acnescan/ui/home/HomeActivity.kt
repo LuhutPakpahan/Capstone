@@ -11,6 +11,8 @@ import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivityHomeNavigationDrawerBinding
-import com.b21cap0398.acnescan.tflife.Classifier
 import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
 import com.b21cap0398.acnescan.ui.login.LoginActivity
 import com.b21cap0398.acnescan.ui.result.ResultActivity
@@ -46,8 +47,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var viewModel: HomeViewModel
 
-    private lateinit var classifier: Classifier.Classifier
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavigationDrawerBinding.inflate(layoutInflater)
@@ -67,8 +66,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setNameProfile()
 
-        initClassifier()
-
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CAMERA
@@ -83,16 +80,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.getUserInformation(auth.currentUser?.email!!).observe(this, {
             val name = it.first_name
             binding.tvProfileName.text = "Hello, " + name
+            val header = binding.navView.getHeaderView(0)
+            val fullName: TextView = header.findViewById(R.id.tv_header_profile_name)
+            fullName.text = it.first_name + " " + it.last_name
             hideLoading()
         })
     }
 
-    private fun initClassifier() {
-        val mInputSize: Int = 180
-        val mLabelPath = "custom_labels.txt"
-        val mModelPath = "acnescan_V5.tflite"
-        classifier = Classifier.Classifier(assets, mModelPath, mLabelPath, mInputSize)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -104,9 +98,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this, UploadDataActivity::class.java))
         }
 
-        if (requestCode == 100) {
-            val captureImage = data?.extras?.get("data") as Bitmap
 
+        if (requestCode == RequestCodes.CAPTURE_IMAGE && data != null) {
+            val captureImage = data.extras?.get("data") as Bitmap
             UploadDataActivity.bitmap = captureImage
             startActivity(Intent(this, UploadDataActivity::class.java))
         }
@@ -160,7 +154,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding.civTakeAPhoto.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, 100)
+            startActivityForResult(intent, RequestCodes.CAPTURE_IMAGE)
         }
 
         binding.civUpload.setOnClickListener {

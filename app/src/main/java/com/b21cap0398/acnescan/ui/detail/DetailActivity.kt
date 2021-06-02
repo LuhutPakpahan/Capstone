@@ -16,6 +16,7 @@ import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.auth.FirebaseAuth
+import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity() {
 
@@ -48,7 +49,6 @@ class DetailActivity : AppCompatActivity() {
                 val arraySortedPossibilities = ArrayList<Possibility>()
                 arraySortedPossibilities.addAll(sortedPossibilities)
                 val highestPossibility = sortedPossibilities[0]
-                val highestPossibilityNumber = highestPossibility.possibility.toString()
 
                 binding.tvAcneName.text = highestPossibility.acne_name
 
@@ -56,7 +56,7 @@ class DetailActivity : AppCompatActivity() {
                     binding.tvAcneDescription.text = it.description
                 })
 
-                binding.ivHighestPossibility.setOnClickListener {
+                binding.cvHighestPossibility.setOnClickListener {
                     val intent = Intent(this, SpecificDetailActivity::class.java)
                     intent.putExtra(SpecificDetailActivity.ACNE_NAME, highestPossibility.acne_name)
                     intent.putExtra(
@@ -67,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 binding.tvHighestPossibilites.text =
-                    getString(R.string.the_highest_possibilites_s) + " " + highestPossibilityNumber + "%"
+                    "${getString(R.string.the_highest_possibilites_s)} ${DecimalFormat("##.#").format(highestPossibility.possibility)} %"
                 binding.apply {
                     val adapter = OtherPossibilitiesAdapter()
                     arraySortedPossibilities.removeAt(0)

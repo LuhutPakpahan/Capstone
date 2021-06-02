@@ -3,7 +3,9 @@ package com.b21cap0398.acnescan.ui.specificdetail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -13,12 +15,13 @@ import com.b21cap0398.acnescan.data.source.local.entity.MedicineInformation
 import com.b21cap0398.acnescan.databinding.ActivitySpecificDetailBinding
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
+import java.text.DecimalFormat
 
 class SpecificDetailActivity : AppCompatActivity() {
 
     companion object {
-        const val ACNE_NAME = "acne_name"
-        const val ACNE_POSSIBILITY = "acne_possibility"
+        const val ACNE_NAME = "acneName"
+        const val ACNE_POSSIBILITY = "acnePossibility"
     }
 
     // Binding
@@ -30,8 +33,11 @@ class SpecificDetailActivity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    private lateinit var acne_name: String
-    private lateinit var acne_possibility: String
+    private lateinit var acneName: String
+    private lateinit var acnePossibility: String
+
+    private lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var dialog: AlertDialog
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,34 +51,45 @@ class SpecificDetailActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, factory)[SpecificDetailViewModel::class.java]
 
         val intent = intent
-        acne_name = intent.getStringExtra(ACNE_NAME).toString()
-        acne_possibility = intent.getLongExtra(ACNE_POSSIBILITY, 0).toString()
+        acneName = intent.getStringExtra(ACNE_NAME).toString()
+        val possibilityNum = intent.getDoubleExtra(ACNE_POSSIBILITY, 0.0)
+        acnePossibility = DecimalFormat("##.#").format(possibilityNum)
 
-        binding.tvAcneName.text = acne_name
+        binding.tvAcneName.text = acneName
         binding.tvAcneNumberPossibility.text =
-            getString(R.string.your_acne_is_similar_to_this_type_of_acne_about) + " " + acne_possibility + "%"
+            getString(R.string.your_acne_is_similar_to_this_type_of_acne_about) + " " + acnePossibility + "%"
 
-        viewModel.getAcneInformationById(acne_name).observe(this, {
+        viewModel.getAcneInformationById(acneName).observe(this, {
             binding.apply {
                 tvAcneDescription.text = it.description
                 tvCauseOfAcne.text = it.causes
                 tvTipsToDeal.text = it.tips
-                setAcneImagesAdapter(it.listImagePaths)
+                setAcneImagesAdapter(it.listImagePaths!!)
             }
 
             hideLoading()
         })
 
-        setRecommendedMedicines(listOf(
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", ""),
-            MedicineInformation("", "", "")
-        ))
+        setRecommendedMedicines(
+            listOf(
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", ""),
+                MedicineInformation("", "", "")
+            )
+        )
+
+        setFeedbackButtonOnClickListener()
         setBackButtonOnClickListener()
+    }
+
+    private fun setFeedbackButtonOnClickListener() {
+        binding.civFeedbackButton.setOnClickListener {
+            createNewFeedbackDialog()
+        }
     }
 
     private fun setRecommendedMedicines(list: List<MedicineInformation>) {
@@ -120,5 +137,29 @@ class SpecificDetailActivity : AppCompatActivity() {
     private fun hideLoading() {
         val loadingScreen = binding.incLoading.root
         loadingScreen.visibility = View.GONE
+    }
+
+    @SuppressLint("InflateParams")
+    private fun createNewFeedbackDialog() {
+        dialogBuilder = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.feedback_popup, null)
+
+        dialogBuilder.setView(view)
+        dialog = dialogBuilder.create()
+        dialog.show()
+
+        view.findViewById<CardView>(R.id.civ_send_feedback).setOnClickListener {
+            dialog.dismiss()
+            createFeedbackSentDialog()
+        }
+    }
+
+    private fun createFeedbackSentDialog() {
+        dialogBuilder = AlertDialog.Builder(this)
+        val sentView = layoutInflater.inflate(R.layout.feeback_sent_popup, null)
+
+        dialogBuilder.setView(sentView)
+        dialog = dialogBuilder.create()
+        dialog.show()
     }
 }

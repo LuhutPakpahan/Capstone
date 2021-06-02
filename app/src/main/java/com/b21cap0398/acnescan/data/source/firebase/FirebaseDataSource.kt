@@ -7,6 +7,7 @@ import com.b21cap0398.acnescan.utils.helper.FirebaseStorageEndpointHelper
 import com.b21cap0398.acnescan.utils.helper.FirestoreEndpointHelper
 import com.b21cap0398.acnescan.utils.helper.ProgressBarOperator
 import java.io.ByteArrayOutputStream
+import java.text.DecimalFormat
 
 class FirebaseDataSource {
     companion object {
@@ -31,10 +32,14 @@ class FirebaseDataSource {
                 Log.d("tag", documents.documents.size.toString())
                 val list = ArrayList<Possibility>()
                 for (document in documents) {
+
+                    var possibility: Double = document["possibility"] as Double
+                    possibility = (possibility * 100)
+
                     list.add(
                         Possibility(
                             document["acne_name"] as String,
-                            document["possibility"] as Long
+                            possibility
                         )
                     )
                 }
@@ -79,10 +84,10 @@ class FirebaseDataSource {
         acneInformationResultDocument.get().addOnSuccessListener { document ->
             if (document != null) {
                 val result = AcneInformation(
-                    listImagePaths = document["acne_images"] as List<String>,
-                    causes = document["causes"] as String,
-                    description = document["description"] as String,
-                    tips = document["tips"] as String
+                    listImagePaths = (document["acne_images"] ?: listOf("w")) as List<String> ,
+                    causes = (document["causes"] ?: "test") as String,
+                    description = (document["description"] ?: "test") as String,
+                    tips = (document["tips"] ?: "test") as String
                 )
 
                 callback.onAcneInformationReceived(result)
@@ -150,7 +155,7 @@ class FirebaseDataSource {
         }
 
         ProgressBarOperator.setDescrtiptionTextView("Uploading is complete")
-        ProgressBarOperator.setProgressBarValue(600)
+        ProgressBarOperator.setProgressBarValue(60)
     }
 
     suspend fun getAllAcceptedAcneScanResult(
