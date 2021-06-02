@@ -41,9 +41,9 @@ class AcceptedListFragment : Fragment() {
         val viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
         viewModel.getAllAcceptedAcneScanResult(auth.currentUser?.email!!)
-            .observe(viewLifecycleOwner, {
+            .observe(viewLifecycleOwner, { list ->
                 val adapter = AcceptedListAdapter()
-                adapter.setList(it)
+                adapter.setList(list.sortedBy { it.date })
                 binding.rvAcceptedList.apply {
                     layoutManager = LinearLayoutManager(context)
                     setHasFixedSize(true)

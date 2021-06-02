@@ -9,11 +9,8 @@
             android:id="@+id/nav_result"
             android:title="Result" />
         <item
-            android:id="@+id/nav_options"
-            android:title="Options" />
-        <item
-            android:id="@+id/nav_term_of_use"
-            android:title="Term of use" />
+            android:id="@+id/nav_term_condition"
+            android:title="Terms and Conditions" />
 
         <item
             android:id="@+id/nav_privacy_policy"

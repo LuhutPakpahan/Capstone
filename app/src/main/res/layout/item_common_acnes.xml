@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground">
+        app:cardCornerRadius="8dp">
 
         <ImageView
             android:id="@+id/iv_acne"

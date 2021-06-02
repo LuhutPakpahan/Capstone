@@ -37,7 +37,7 @@ class AcceptedListAdapter : RecyclerView.Adapter<AcceptedListAdapter.CustomViewH
         fun bind(resultAcne: AcneScanResult, position: Int) {
             binding.apply {
                 tvScanResultNum.text = "Scan Result ${position + 1}"
-                tvDate.text = "Date : ${resultAcne.date}"
+                tvDate.text = "Date : ${resultAcne.date?.take(10)}"
                 FirebaseStorageEndpointHelper.getDownloadUrlOfReference(resultAcne.image_path!!).addOnSuccessListener {
                     Log.d("photo", "Photo load successs")
                     Glide.with(itemView.context)

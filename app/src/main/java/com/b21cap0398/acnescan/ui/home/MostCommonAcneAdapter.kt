@@ -8,11 +8,17 @@ import com.b21cap0398.acnescan.databinding.ItemCommonAcnesBinding
 
 class MostCommonAcneAdapter : RecyclerView.Adapter<MostCommonAcneAdapter.CustomViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
     private val listCommonAcnes = ArrayList<CommonAcne>()
 
     fun setListCommonAcnes(list: List<CommonAcne>){
         listCommonAcnes.clear()
         listCommonAcnes.addAll(list)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
     }
 
     inner class CustomViewHolder(val binding: ItemCommonAcnesBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -27,11 +33,15 @@ class MostCommonAcneAdapter : RecyclerView.Adapter<MostCommonAcneAdapter.CustomV
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-
+            onItemClickCallback.onItemClicked(listCommonAcnes[position])
         }
     }
 
     override fun getItemCount(): Int {
         return listCommonAcnes.size
+    }
+
+    interface OnItemClickCallback{
+        fun onItemClicked(data: CommonAcne)
     }
 }

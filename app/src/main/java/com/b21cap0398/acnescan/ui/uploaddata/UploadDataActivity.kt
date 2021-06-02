@@ -1,8 +1,10 @@
 package com.b21cap0398.acnescan.ui.uploaddata
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.b21cap0398.acnescan.data.source.local.entity.AcneScanResult
@@ -14,8 +16,11 @@ import com.b21cap0398.acnescan.utils.helper.ProgressBarOperator
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import org.tensorflow.lite.support.image.TensorImage
+import java.io.File
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class UploadDataActivity : AppCompatActivity() {
 
@@ -26,6 +31,8 @@ class UploadDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadDataBinding
 
     private lateinit var viewModel: UploadDataViewModel
+
+    private lateinit var currentPhotoPath: String
 
     private val auth = FirebaseAuth.getInstance()
 
@@ -43,7 +50,7 @@ class UploadDataActivity : AppCompatActivity() {
         val randomString = getRandomString(10)
 
         val currentTime = LocalDateTime.now()
-        val date = currentTime.format(DateTimeFormatter.ISO_DATE)
+        val date = currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
 
         // Predicting the acne
         val acneModel = Acnescan6.newInstance(this)

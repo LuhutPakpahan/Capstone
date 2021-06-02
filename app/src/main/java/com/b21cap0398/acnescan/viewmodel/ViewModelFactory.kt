@@ -9,6 +9,7 @@ import com.b21cap0398.acnescan.ui.editprofile.EditProfileViewModel
 import com.b21cap0398.acnescan.ui.home.HomeViewModel
 import com.b21cap0398.acnescan.ui.result.ResultViewModel
 import com.b21cap0398.acnescan.ui.signup.SignupViewModel
+import com.b21cap0398.acnescan.ui.specificcommonacne.SpecificCommonAcneViewModel
 import com.b21cap0398.acnescan.ui.specificdetail.SpecificDetailViewModel
 import com.b21cap0398.acnescan.ui.uploaddata.UploadDataViewModel
 
@@ -52,6 +53,10 @@ class ViewModelFactory private constructor(private val mainRepository: MainRepos
 
             modelClass.isAssignableFrom(UploadDataViewModel::class.java) -> {
                 UploadDataViewModel(mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(SpecificCommonAcneViewModel::class.java) -> {
+                SpecificCommonAcneViewModel(mainRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

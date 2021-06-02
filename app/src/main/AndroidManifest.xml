@@ -9,6 +9,12 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18"
+        tools:ignore="ScopedStorage" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.uploaddata.UploadDataActivity"
+        <activity android:name=".ui.specificcommonacne.SpecificCommonAcneActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ui.uploaddata.UploadDataActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
             android:name=".ui.result.ResultActivity"
@@ -65,6 +76,18 @@
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity android:name=".MainActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.b21cap0398.acnescan"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
+
     </application>
 
 </manifest>
