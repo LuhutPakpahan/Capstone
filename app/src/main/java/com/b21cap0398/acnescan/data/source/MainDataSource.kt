@@ -35,4 +35,6 @@ interface MainDataSource {
     fun setResultPhoto(bitmap: Bitmap, email: String, result_id: String): LiveData<String>
 
     fun setScanResultAndPossibilites(email: String, result_id: String, acneScanResult: AcneScanResult, possibilities: List<Possibility>)
+
+    fun setFeedback(feedbackForm: FeedbackForm)
 }

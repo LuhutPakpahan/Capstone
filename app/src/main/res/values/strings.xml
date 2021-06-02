@@ -65,7 +65,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="your_acne_possibility">Your Acne Possibility</string>
-    <string name="we_have_made_a_prediction_from_the_photo_you_submitted_we_found_a_number_of_s_possibilites">We have made a prediction from the photo you submitted, we found a number of %s possibilites</string>
+    <string name="we_have_made_a_prediction_from_the_photo_you_submitted_we_found_a_number_of_s_possibilites">We have made a prediction from the photo you submitted</string>
     <string name="the_highest_possibilites_s">The Highest Possibilites: </string>
     <string name="other_possibilites">Other Possibilites</string>
     <string name="percentage">%s%</string>

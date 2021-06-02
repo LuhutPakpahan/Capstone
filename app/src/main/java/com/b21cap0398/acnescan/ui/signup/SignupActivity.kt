@@ -70,6 +70,7 @@ class SignupActivity : AppCompatActivity() {
                         age = age
                     )
                 } else {
+                    hideLoading()
                     // if first name is empty
                     if (!UserValidationHelper.isValidField(firstName))
                         showFieldErrorWithCounter(
@@ -118,7 +119,6 @@ class SignupActivity : AppCompatActivity() {
                         )
                     else hideFieldError(tfConfirmPassword)
                 }
-                hideLoading()
             }
         }
     }
@@ -133,8 +133,10 @@ class SignupActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     onBackPressed()
+                    hideLoading()
                 } else {
                     Toast.makeText(this@SignupActivity, "Sign up failed", Toast.LENGTH_SHORT).show()
+                    hideLoading()
                 }
             }
     }

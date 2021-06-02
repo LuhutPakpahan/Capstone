@@ -3,6 +3,7 @@ package com.b21cap0398.acnescan.ui.specificdetail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.RatingBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -11,9 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.b21cap0398.acnescan.R
+import com.b21cap0398.acnescan.data.source.local.entity.FeedbackForm
 import com.b21cap0398.acnescan.data.source.local.entity.MedicineInformation
 import com.b21cap0398.acnescan.databinding.ActivitySpecificDetailBinding
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import java.text.DecimalFormat
 
@@ -39,6 +42,8 @@ class SpecificDetailActivity : AppCompatActivity() {
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
 
+    private lateinit var viewModel: SpecificDetailViewModel
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +53,7 @@ class SpecificDetailActivity : AppCompatActivity() {
         showLoading()
 
         val factory = ViewModelFactory.getInstance()
-        val viewModel = ViewModelProvider(this, factory)[SpecificDetailViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[SpecificDetailViewModel::class.java]
 
         val intent = intent
         acneName = intent.getStringExtra(ACNE_NAME).toString()
@@ -151,6 +156,14 @@ class SpecificDetailActivity : AppCompatActivity() {
 
         view.findViewById<CardView>(R.id.civ_send_feedback).setOnClickListener {
             dialog.dismiss()
+            val score_question_1 = view.findViewById<RatingBar>(R.id.rb_question_one).rating.toString()
+            val score_question_2 = view.findViewById<RatingBar>(R.id.rb_question_two).rating.toString()
+            val feedback = view.findViewById<TextInputLayout>(R.id.tf_suggestions).editText?.text.toString()
+
+            val feedbackForm = FeedbackForm(score_question_1, score_question_2, feedback)
+
+            viewModel.setFeedback(feedbackForm)
+
             createFeedbackSentDialog()
         }
     }

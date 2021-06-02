@@ -44,9 +44,7 @@ class SpecificCommonAcneActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, factory)[SpecificCommonAcneViewModel::class.java]
 
         val intent = intent
-        acneName = intent.getStringExtra(SpecificDetailActivity.ACNE_NAME).toString()
-        val possibilityNum = intent.getDoubleExtra(SpecificDetailActivity.ACNE_POSSIBILITY, 0.0)
-        acnePossibility = DecimalFormat("##.#").format(possibilityNum)
+        acneName = intent.getStringExtra(ACNE_NAME).toString()
 
         binding.tvAcneName.text = acneName[0].toUpperCase() + acneName.substring(1)
 

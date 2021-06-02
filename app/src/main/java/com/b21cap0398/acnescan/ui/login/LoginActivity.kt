@@ -45,9 +45,11 @@ class LoginActivity : AppCompatActivity() {
                 if (UserValidationHelper.isValidPassword(password) &&
                     UserValidationHelper.isValidEmail(email)
                 ) {
+                    showLoading()
                     resetErrorState()
                     signinToFirebase(email, password)
                 } else {
+                    finishLoading()
                     if (!UserValidationHelper.isValidEmail(email)) {
                         showFieldError(tfEmail, getString(R.string.email_is_not_valid))
                     } else {
@@ -60,8 +62,6 @@ class LoginActivity : AppCompatActivity() {
                         hideFieldError(tfPassword)
                     }
                 }
-
-                finishLoading()
             }
         }
     }
@@ -126,6 +126,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
+                    finishLoading()
                 } else {
                     showFieldError(binding.tvWrongEmailPassword)
                 }

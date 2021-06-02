@@ -24,7 +24,6 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainD
 
     override fun getAcneScanResult(email: String, result_id: String): LiveData<AcneScanResult> {
         val result = MutableLiveData<AcneScanResult>()
-        var test = "0"
         CoroutineScope(IO).launch {
             firebaseDataSource.getAcneScanResult(
                 email,
@@ -153,6 +152,12 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainD
     ) {
         CoroutineScope(IO).launch {
             firebaseDataSource.setScanResultAndPossibilites(email, result_id, acneScanResult, possibilities)
+        }
+    }
+
+    override fun setFeedback(feedbackForm: FeedbackForm) {
+        CoroutineScope(IO).launch {
+            firebaseDataSource.setFeedback(feedbackForm)
         }
     }
 }

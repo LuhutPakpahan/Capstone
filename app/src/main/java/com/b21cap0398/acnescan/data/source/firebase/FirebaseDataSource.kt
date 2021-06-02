@@ -255,6 +255,10 @@ class FirebaseDataSource {
         }
     }
 
+    suspend fun setFeedback(feedbackForm: FeedbackForm) {
+        FirestoreEndpointHelper.db.collection("feedbacks").document().set(feedbackForm)
+    }
+
     interface LoadAllAcceptedAcneScanResultCallback {
         fun onAllAcceptedAcneScanResultReceived(acneScanResults: List<AcneScanResult>)
     }

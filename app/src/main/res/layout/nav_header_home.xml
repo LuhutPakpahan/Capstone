@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="12dp"
-        android:src="@drawable/acne_scan_splashscreen"
+        android:src="@drawable/logo"
         app:civ_border_color="@color/gradient_darker"
         android:clickable="true"
         app:civ_border_width="2dp" />
