@@ -2,34 +2,33 @@
 ## Acne Scan
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-https://raw.githubusercontent.com/DouiriAli/android-mvp-architecture-example/master/media/capture.png
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-### Built With
-
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Android Studio: Kotlin](https://getbootstrap.com)
-* [Firebase](https://jquery.com)
-* [Tensorflow lite Model](https://laravel.com)
-* [Google Cloud](https://laravel.com)
+Our project is an application to detect the type of acne on the skin. The many types of acne make it difficult for us to determine the right type of acne. This will result in improper handling of acne, so that it does not subside or even gets worse. That way we want to help people identify the type of acne on their skin, so that they can provide the right treatment steps. To identify acne, users only need to take a photo of the part of the skin where there is acne. Then the application will give you the final result in the form of the type of acne and the right treatment steps.
 
 
+### TEAM B21-CAP0398
 
-<!-- GETTING STARTED -->
+### Active Member ID and Name
+
+* M3272943 - Riyan Sthefanus Nainggolan
+* M0121213 - Wiratama Abisatya
+* M2642462  - Muthia Daniyati 
+* C2642461 - Indah Dwi Setyaningrum
+* A1831881 - Robertus Luhut Pandapotan Pakpahan
+* A1831882 - Fikran Akbar
+
+### Selected Theme : Healthcare
+
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+* Download the dataset [dermenet](www.dermnet.com0); [skin90](https://www.kaggle.com/dinartas/skin90); [skin50](https://www.kaggle.com/dinartas/skin50), the process are on the notebook.
+* Create the training and validation batch using the train generator.
+* Create the label by using the train generator function.
+* Training the model.
+* Validating the model.
+* Use the converter to convert the keras model into the tflite model.
+* Move the tflite file and the label into assets label in android folder.
+* Go the FloatMobilenetClassifier and change the path into our previous model and label.
 
 ### Prerequisites
 
@@ -60,9 +59,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+Prototype ---> [Acne Scan](https://www.figma.com/proto/1rpityhZ5BBXvVF19rVUpJ/Acne-Scan?node-id=18%3A7391&scaling=contain&page-id=14%3A2)
 
 
 
@@ -82,6 +79,5 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Gmail - [B21-CAP0398](https://groups.google.com/a/bangkit.academy/g/b21-cap0398/about?pli=1) - B21-CAP0398@bangkit.academy
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
