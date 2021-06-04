@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Acne Scan</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
@@ -65,8 +65,8 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="your_acne_possibility">Your Acne Possibility</string>
-    <string name="we_have_made_a_prediction_from_the_photo_you_submitted_we_found_a_number_of_s_possibilites">We have made a prediction from the photo you submitted, we found a number of %s possibilites</string>
-    <string name="the_highest_possibilites_s">The highest possibilites - %s%</string>
+    <string name="we_have_made_a_prediction_from_the_photo_you_submitted_we_found_a_number_of_s_possibilites">We have made a prediction from the photo you submitted</string>
+    <string name="the_highest_possibilites_s">The Highest Possibilites: </string>
     <string name="other_possibilites">Other Possibilites</string>
     <string name="percentage">%s%</string>
     <string name="password_title">Password ?</string>
@@ -90,5 +90,19 @@
     <string name="incorrect_email_password">*Incorrect email / password</string>
     <string name="edit">Edit</string>
     <string name="last_name_should_be_filled">Last name should be filled</string>
+    <string name="possibility">Possibility:</string>
+    <string name="scan_result_s">Scan Result %s</string>
+    <string name="name_of_medicice">Name of medicice</string>
+    <string name="price_s">Price: %s</string>
+    <string name="recommended_medicine">Recommended Medicine</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="we_hope_you_enjoy_a_good_experience_after_using_the_acne_scan_application_for_criticism_and_suggestions_please_write_below">We hope you enjoy a good experience after using the acne scan application. For criticism and suggestions, please write below!</string>
+    <string name="are_the_results_of_acne_detection_correct">Are the results of acne detection correct ?</string>
+    <string name="are_the_tips_and_tricks_for_the_treatment_of_acne_clear_and_user_enough">Are the tips and tricks for the treatment of acne clear and user enough</string>
+    <string name="suggestions_and_critics">Suggestions and critics :</string>
+    <string name="feedback_has_been_sent">Feedback has been sent!</string>
+    <string name="thank_you_for_your_availability_to_fill_in_the_feedback_your_feedback_is_meaningful_in_our_future_development">Thank you for your availability to fill in the feedback. Your feedback is meaningful in our future development</string>
 
+    <string name="privacy_policy_link">https://acne-scan-0.flycricket.io/privacy.html</string>
+    <string name="terms_conditions_link">https://acne-scan-0.flycricket.io/terms.html</string>
 </resources>

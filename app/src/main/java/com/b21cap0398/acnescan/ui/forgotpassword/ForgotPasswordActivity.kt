@@ -4,11 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.ActivityForgotPasswordBinding
 import com.b21cap0398.acnescan.ui.emailreset.EmailResetActivity
-import com.b21cap0398.acnescan.utils.UserValidationHelper
+import com.b21cap0398.acnescan.utils.helper.UserValidationHelper
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {

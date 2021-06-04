@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
 import com.b21cap0398.acnescan.databinding.FragmentPendingListBinding
 import com.b21cap0398.acnescan.ui.detail.DetailActivity
-import com.b21cap0398.acnescan.utils.DummyResultAcne
+import com.b21cap0398.acnescan.utils.dummydata.DummyResultAcne
 
 class PendingListFragment : Fragment() {
 
@@ -28,6 +28,9 @@ class PendingListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPendingListBinding.bind(view)
 
+        hideEmptyListWarning()
+        binding.progressBar.visibility = View.VISIBLE
+
         val adapter = PendingListAdapter()
         adapter.setList(DummyResultAcne.addDummyResultAcne())
         binding.rvPendingList.apply {
@@ -42,5 +45,20 @@ class PendingListFragment : Fragment() {
             })
             this.adapter = adapter
         }
+
+        if (adapter.itemCount <= 0) {
+            showEmptyListWarning()
+        }
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.VISIBLE
+    }
+
+    private fun hideEmptyListWarning() {
+        val emptyListWarning = binding.warningEmptyList.root
+        emptyListWarning.visibility = View.GONE
     }
 }

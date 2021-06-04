@@ -10,7 +10,7 @@ import com.b21cap0398.acnescan.databinding.ActivityLoginBinding
 import com.b21cap0398.acnescan.ui.forgotpassword.ForgotPasswordActivity
 import com.b21cap0398.acnescan.ui.home.HomeActivity
 import com.b21cap0398.acnescan.ui.signup.SignupActivity
-import com.b21cap0398.acnescan.utils.UserValidationHelper
+import com.b21cap0398.acnescan.utils.helper.UserValidationHelper
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
@@ -45,9 +45,11 @@ class LoginActivity : AppCompatActivity() {
                 if (UserValidationHelper.isValidPassword(password) &&
                     UserValidationHelper.isValidEmail(email)
                 ) {
+                    showLoading()
                     resetErrorState()
                     signinToFirebase(email, password)
                 } else {
+                    finishLoading()
                     if (!UserValidationHelper.isValidEmail(email)) {
                         showFieldError(tfEmail, getString(R.string.email_is_not_valid))
                     } else {
@@ -60,8 +62,6 @@ class LoginActivity : AppCompatActivity() {
                         hideFieldError(tfPassword)
                     }
                 }
-
-                finishLoading()
             }
         }
     }
@@ -126,6 +126,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
+                    finishLoading()
                 } else {
                     showFieldError(binding.tvWrongEmailPassword)
                 }

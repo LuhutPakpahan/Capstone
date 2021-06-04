@@ -1,4 +1,4 @@
-package com.b21cap0398.acnescan.utils
+package com.b21cap0398.acnescan.utils.dummydata
 
 import com.b21cap0398.acnescan.data.source.local.entity.AcnePicture
 
