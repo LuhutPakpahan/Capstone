@@ -22,10 +22,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21cap0398.acnescan.R
+import com.b21cap0398.acnescan.data.source.local.entity.Article
 import com.b21cap0398.acnescan.data.source.local.entity.CommonAcne
 import com.b21cap0398.acnescan.databinding.ActivityHomeNavigationDrawerBinding
 import com.b21cap0398.acnescan.ui.editprofile.EditProfileActivity
@@ -37,8 +39,12 @@ import com.b21cap0398.acnescan.utils.RequestCodes
 import com.b21cap0398.acnescan.utils.dummydata.DummyArticle
 import com.b21cap0398.acnescan.utils.dummydata.DummyCommonAcne
 import com.b21cap0398.acnescan.viewmodel.ViewModelFactory
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import io.grpc.Compressor
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -47,7 +53,8 @@ import java.util.*
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
 
-    private lateinit var currentPhotoPath: String
+    private lateinit var photoPath: String
+    private lateinit var photoUri: Uri
 
     // Binding
     private lateinit var binding: ActivityHomeNavigationDrawerBinding
@@ -113,30 +120,43 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
-        if (requestCode == RequestCodes.CAPTURE_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            var captureImage = data.extras?.get("data") as Bitmap
+        if (requestCode == RequestCodes.CAPTURE_IMAGE && resultCode == Activity.RESULT_OK) {
+            val captureImage = MediaStore.Images.Media.getBitmap(this.contentResolver, photoUri)
+            val baos = ByteArrayOutputStream()
+            captureImage.compress(Bitmap.CompressFormat.JPEG,40, baos)
+            val newByte = baos.toByteArray()
+            var compressedCaptureImage = BitmapFactory.decodeByteArray(newByte, 0, newByte.size)
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    captureImage = captureImage.copy(Bitmap.Config.ARGB_8888, true)
+                    compressedCaptureImage = compressedCaptureImage.copy(Bitmap.Config.ARGB_8888, true)
                 }
             } catch (e: Exception) {
                 println("Could not convert image to BitMap")
                 e.printStackTrace()
             }
 
-            UploadDataActivity.bitmap = captureImage
+            UploadDataActivity.bitmap = compressedCaptureImage
             startActivity(Intent(this, UploadDataActivity::class.java))
         }
     }
 
     private fun setDailyReadAdapter() {
-        dailyReadAdapter = DailyReadAdapter()
-        dailyReadAdapter.setDailyReadList(DummyArticle.addDummyArticle())
-        binding.rvYourDailyRead.apply {
-            layoutManager = LinearLayoutManager(this@HomeActivity)
-            setHasFixedSize(true)
-            adapter = dailyReadAdapter
-        }
+        viewModel.getAllArticle().observe(this, {
+            dailyReadAdapter = DailyReadAdapter()
+            dailyReadAdapter.setDailyReadList(it)
+            dailyReadAdapter.setOnItemClickCallback(object : DailyReadAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: Article) {
+                    val uri = Uri.parse(data.article_url)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
+                }
+            })
+            binding.rvYourDailyRead.apply {
+                layoutManager = LinearLayoutManager(this@HomeActivity)
+                setHasFixedSize(true)
+                adapter = dailyReadAdapter
+            }
+        })
     }
 
     private fun setMostCommonAcneAdapter() {
@@ -185,9 +205,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         binding.civTakeAPhoto.setOnClickListener {
-            //val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            //startActivityForResult(intent, RequestCodes.CAPTURE_IMAGE)
-            dispatchTakePictureIntent()
+            takePicture()
         }
 
         binding.civUpload.setOnClickListener {
@@ -199,6 +217,41 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 RequestCodes.TAKE_GALLERY_IMAGE
             )
         }
+    }
+
+    private fun takePicture() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        if (intent.resolveActivity(packageManager) != null) {
+            var photoFile: File? = null
+            try {
+                photoFile = createImageFile()
+            } catch (e: IOException) {}
+
+            if (photoPath != null) {
+                val photoUri = FileProvider.getUriForFile(
+                    this,
+                    "com.b21cap0398.acnescan",
+                    photoFile as File
+                )
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                startActivityForResult(intent, RequestCodes.CAPTURE_IMAGE)
+            }
+        }
+    }
+
+    private fun createImageFile(): File {
+        val fileName = "IMAGE"
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val image = File.createTempFile(
+            fileName,
+            ".jpg",
+            storageDir
+        )
+
+        photoUri = image.toUri()
+        photoPath = image.absolutePath
+        return image
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -251,37 +304,5 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadingScreen.visibility = View.GONE
     }
 
-    @SuppressLint("SimpleDateFormat")
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES) as File
-        return File.createTempFile(
-            "JPEG_${timeStamp}_",
-            ".jpg",
-            storageDir
-        ).apply { currentPhotoPath = absolutePath }
-    }
 
-    private fun dispatchTakePictureIntent() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            .also { takePictureIntent ->
-            takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    null
-                }
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        this,
-                        "com.b21cap0398.acnescan",
-                        it
-                    )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, currentPhotoPath)
-                    startActivityForResult(takePictureIntent, RequestCodes.CAPTURE_IMAGE)
-                }
-            }
-        }
-    }
 }

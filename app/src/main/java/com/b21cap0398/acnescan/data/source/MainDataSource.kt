@@ -37,4 +37,6 @@ interface MainDataSource {
     fun setScanResultAndPossibilites(email: String, result_id: String, acneScanResult: AcneScanResult, possibilities: List<Possibility>)
 
     fun setFeedback(feedbackForm: FeedbackForm)
+
+    fun getArticles(): LiveData<List<Article>>
 }

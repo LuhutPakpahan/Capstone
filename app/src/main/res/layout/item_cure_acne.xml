@@ -19,7 +19,7 @@
             android:id="@+id/iv_image_cure_acne"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/iv_information_place"
             tools:ignore="ContentDescription" />

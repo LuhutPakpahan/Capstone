@@ -1,5 +1,6 @@
 package com.b21cap0398.acnescan.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,12 +26,16 @@ class MostCommonAcneAdapter : RecyclerView.Adapter<MostCommonAcneAdapter.CustomV
     }
 
     inner class CustomViewHolder(val binding: ItemCommonAcnesBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(acne: CommonAcne) {
             FirebaseStorageEndpointHelper.getDownloadUrlOfReference(acne.image_path).addOnSuccessListener {
                 Glide.with(itemView.context)
                     .load(it)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.ivAcne)
+
+                binding.tvAcneName.text = acne.acneId[0].toUpperCase() + acne.acneId.substring(1)
+                binding.tvAcneDescription.text = acne.description
             }
         }
     }

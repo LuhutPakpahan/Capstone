@@ -259,6 +259,26 @@ class FirebaseDataSource {
         FirestoreEndpointHelper.db.collection("feedbacks").document().set(feedbackForm)
     }
 
+    suspend fun getAllArticle(callback: LoadAllArticleCallback) {
+        FirestoreEndpointHelper.getArticlesReference().get().addOnSuccessListener { documents ->
+            if (documents != null) {
+                val list = ArrayList<Article>()
+                for (document in documents) {
+                    val article = Article(
+                        image_url = document["image_url"] as String?,
+                        title = document["title"] as String?,
+                        description = document["description"] as String?,
+                        date = document["date"] as String?,
+                        article_url = document["article_url"] as String?
+                    )
+                    list.add(article)
+                }
+
+                callback.onArticlesReceived(list)
+            }
+        }
+    }
+
     interface LoadAllAcceptedAcneScanResultCallback {
         fun onAllAcceptedAcneScanResultReceived(acneScanResults: List<AcneScanResult>)
     }
@@ -286,4 +306,9 @@ class FirebaseDataSource {
     interface UploadPhotoCallback {
         fun onPhotoUploaded(photoPath: String)
     }
+
+    interface LoadAllArticleCallback {
+        fun onArticlesReceived(articles: List<Article>)
+    }
 }
+

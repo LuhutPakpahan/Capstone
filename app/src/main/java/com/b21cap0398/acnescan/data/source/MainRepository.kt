@@ -160,4 +160,19 @@ class MainRepository(private val firebaseDataSource: FirebaseDataSource) : MainD
             firebaseDataSource.setFeedback(feedbackForm)
         }
     }
+
+    override fun getArticles(): LiveData<List<Article>> {
+        val result = MutableLiveData<List<Article>>()
+
+        CoroutineScope(IO).launch {
+            firebaseDataSource.getAllArticle(object : FirebaseDataSource.LoadAllArticleCallback {
+                override fun onArticlesReceived(articles: List<Article>) {
+                    result.postValue(articles)
+                }
+
+            })
+        }
+
+        return result
+    }
 }

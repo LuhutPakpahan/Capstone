@@ -22,19 +22,15 @@ object FirestoreEndpointHelper {
         return db.collection("acnes").document(acneId)
     }
 
-    fun getCommonAcnesReference() : CollectionReference {
-        return db.collection("commonacnes")
-    }
-
-    fun getDailyReadReference() : CollectionReference {
-        return db.collection("dailyread")
-    }
-
     fun getAllAcneScanResult(email: String) : CollectionReference {
         return getUserDocumentReference(email).collection("results")
     }
 
     fun getAllPossibilitesReference(email: String, result_id: String) : CollectionReference {
         return getAcneScanResultReference(email, result_id).collection("possibilities")
+    }
+
+    fun getArticlesReference(): CollectionReference {
+        return db.collection("articles")
     }
 }
