@@ -1,8 +1,6 @@
 <!-- ABOUT THE PROJECT -->
 ## Acne Scan
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 Our project is an application to detect the type of acne on the skin. The many types of acne make it difficult for us to determine the right type of acne. This will result in improper handling of acne, so that it does not subside or even gets worse. That way we want to help people identify the type of acne on their skin, so that they can provide the right treatment steps. To identify acne, users only need to take a photo of the part of the skin where there is acne. Then the application will give you the final result in the form of the type of acne and the right treatment steps.
 
 
