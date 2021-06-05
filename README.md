@@ -56,7 +56,7 @@ There are several conditions before you can clone this project and connect it wi
 5. Enter your tflite model by navigating the model location to the tflite file you have prepared, then click next and finish
 6. Go to "UploadDataActivity" and replace the class reference of the existing model by changing the code "Acnescan6" to the class name of your model.
 7. And you're good to go.
-Tips: You can use ctrl + r, then write "Acnescan6" and fill in the class name of the model you have entered
+* Tips: You can use ctrl + r, then write "Acnescan6" and fill in the class name of the model you have entered
 
 
 <!-- USAGE EXAMPLES -->
