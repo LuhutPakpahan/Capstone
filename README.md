@@ -21,6 +21,7 @@ Our project is an application to detect the type of acne on the skin. The many t
 
 ## Getting Started
 
+First, preparing the tflite model for direct inclusion in the android project. Here are the steps:
 * Download the dataset [dermenet](www.dermnet.com0); [skin90](https://www.kaggle.com/dinartas/skin90); [skin50](https://www.kaggle.com/dinartas/skin50), the process are on the notebook.
 * Create the training and validation batch using the train generator.
 * Create the label by using the train generator function.
@@ -30,30 +31,25 @@ Our project is an application to detect the type of acne on the skin. The many t
 * Move the tflite file and the label into assets label in android folder.
 * Go the FloatMobilenetClassifier and change the path into our previous model and label.
 
+Second, you need to create a project first to be connected to the android studio project on your device. Here are the steps:
+* Open [firebase website](www.firebase.google.com), and click get started
+* Create a new project in firebase console
+* When the firebase project is created, add your android app to firebase by clicking android icon to add the project
+* Register the app by fill the name of android package name (mandatory), app name (optional) and debug signing SHA-1 (optional)
+* After doing it, you will file file namely "google-services.json". you will replace the google-services file with the one you downloaded
+* In the next step you will be asking for add firebase sdk, you can skip it
+* After you have finished setting up the firebase project, now you need to prepare some of the services as well such as firebase firestore, cloud storage, and authentication
+
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+There are several conditions before you can clone this project and connect it with your own firebase project and use the model you created yourself
+* Latest version of android studio
+* Firebase project
+* Tflite model
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
+1. Clone the repo https://github.com/LuhutPakpahan/Capstone.git
 
 
 <!-- USAGE EXAMPLES -->
